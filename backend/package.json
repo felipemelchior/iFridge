@@ -4,10 +4,10 @@
   "description": "Backend for iFridge",
   "main": "index.js",
   "repository": "https://github.com/homdreen/iFridge",
-  "author": "CC SoftHousel",
+  "author": "CC SoftHouse",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/Server.js"
   },
   "dependencies": {
     "dotenv": "^8.1.0",
