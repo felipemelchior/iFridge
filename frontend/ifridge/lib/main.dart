@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-// import 'package:ifridge/login_screen.dart';
-import 'package:ifridge/login_screen2.dart';
+import 'screens/new_login_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
-      title: 'App de Comida',
+      title: 'iFridge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blue,
       ),
-      home: LoginScreen2(),
+      home: LoginScreen(),
     );
   }
 }
