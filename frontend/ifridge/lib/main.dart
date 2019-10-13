@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ifridge/login_screen.dart';
+// import 'package:ifridge/login_screen.dart';
+import 'package:ifridge/login_screen2.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: LoginScreen(),
+      home: LoginScreen2(),
     );
   }
 }
