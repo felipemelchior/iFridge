@@ -39,7 +39,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       bottomRight: Radius.circular(50),
                     ),
                   ),
-                  child: Text(
+                  child:
+                  //  CustomPaint(
+                  //   painter: ShapeCurvo(),
+                  // ),
+                  Text(
                     "iFridge",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -59,11 +63,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: ScreenUtil.getInstance().setHeight(120),
                 ),
                 LoginFormCard(),
+                SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(100),
+                ),
                 Padding(
-                  padding: EdgeInsets.only(
-                    top: 70,
-                    bottom: 35,
-                  ),
+                  padding: EdgeInsets.only(bottom: 35),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -92,5 +96,31 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+}
+
+class ShapeCurvo extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.green[800];
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+
+    path.moveTo(0, size.height * 0.9167);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.875,
+        size.width * 0.5, size.height * 0.9167);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.9584,
+        size.width * 1.0, size.height * 0.9167);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }

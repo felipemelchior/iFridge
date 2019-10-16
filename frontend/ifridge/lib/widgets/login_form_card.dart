@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginFormCard extends StatelessWidget {
+class LoginFormCard extends StatefulWidget {
+  @override
+  _LoginFormCardState createState() => _LoginFormCardState();
+}
+
+class _LoginFormCardState extends State<LoginFormCard> {
+  bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       width: ScreenUtil.getInstance().setWidth(700),
-      height: ScreenUtil.getInstance().setHeight(680),
+      height: ScreenUtil.getInstance().setHeight(790),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
@@ -26,55 +32,23 @@ class LoginFormCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Entre!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: ScreenUtil.getInstance().setSp(55),
-                    fontFamily: "Merriweather",
-                    letterSpacing: .6)),
-            SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
-            ),
-            Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-              padding: EdgeInsets.only(
-                bottom: 10,
-              ),
-              alignment: Alignment.center,
-              child: RaisedButton(
-                color: Colors.white70,
-                child: Text(
-                  "Logar com Facebook",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Merriweather",
-                    fontSize: ScreenUtil.getInstance().setSp(40),
-                    color: Color(0xFF3b5998),
-                  ),
-                ),
-                onPressed: () {},
+            Text(
+              "Entre!",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: ScreenUtil.getInstance().setSp(70),
+                fontFamily: "Merriweather",
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                      blurRadius: 6,
+                      color: Colors.black87,
+                      offset: Offset(2, 2)),
+                ],
               ),
             ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Divider(),
-                ),
-                Text(
-                  "Ou",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: ScreenUtil.getInstance().setSp(30),
-                    fontFamily: "Merriweather",
-                  ),
-                ),
-                Expanded(
-                  child: Divider(),
-                ),
-              ],
-            ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
+              height: ScreenUtil.getInstance().setHeight(30),
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.2,
@@ -83,7 +57,6 @@ class LoginFormCard extends StatelessWidget {
                 left: 12,
                 top: 4,
                 right: 12,
-                bottom: 4,
               ),
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -112,7 +85,7 @@ class LoginFormCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
+              height: ScreenUtil.getInstance().setHeight(30),
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.2,
@@ -121,7 +94,6 @@ class LoginFormCard extends StatelessWidget {
                 left: 12,
                 top: 4,
                 right: 12,
-                bottom: 4,
               ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -151,53 +123,103 @@ class LoginFormCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
+              height: ScreenUtil.getInstance().setHeight(10),
+            ),
+            GestureDetector(
+              child: Row(
+                children: <Widget>[
+                  Checkbox(
+                    value: _rememberMeFlag,
+                    onChanged: (value) => setState(() {
+                      _rememberMeFlag = !_rememberMeFlag;
+                    }),
+                  ),
+                  Text(
+                    "Lembrar-me",
+                    style: TextStyle(color: Colors.black),
+                  )
+                ],
+              ),
+              onTap: () => setState(() {
+                _rememberMeFlag = !_rememberMeFlag;
+              }),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: FlatButton.icon(
+                color: Colors.red,
+                icon: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  "Entrar",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: ScreenUtil.getInstance().setSp(40),
+                  ),
+                ),
+                onPressed: () {},
+              ),
+            ),
+            SizedBox(
+              height: ScreenUtil.getInstance().setHeight(10),
             ),
             Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    height: ScreenUtil.getInstance().setHeight(70),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: FlatButton.icon(
-                      color: Colors.red,
-                      icon: Icon(
-                        Icons.exit_to_app,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        "Entrar",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ScreenUtil.getInstance().setSp(40),
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
+                  child: Divider(),
                 ),
-                SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(35),
+                Text(
+                  "OU",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: ScreenUtil.getInstance().setSp(30),
+                    fontFamily: "Merriweather",
+                  ),
                 ),
                 Expanded(
-                  child: InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "Esqueceu sua senha?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontFamily: "Merriweather",
-                      ),
-                    ),
-                  ),
+                  child: Divider(),
                 ),
               ],
+            ),
+            Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+              padding: EdgeInsets.only(
+                bottom: 10,
+              ),
+              alignment: Alignment.center,
+              child: FlatButton(
+                color: Colors.white,
+                child: Text(
+                  "Logar com Facebook",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Merriweather",
+                    fontSize: ScreenUtil.getInstance().setSp(40),
+                    color: Color(0xFF3b5998),
+                  ),
+                ),
+                onPressed: () {},
+              ),
+            ),
+            Center(
+              child: InkWell(
+                onTap: () {},
+                child: Text(
+                  "Esqueceu sua senha?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontFamily: "Merriweather",
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: ScreenUtil.getInstance().setHeight(30),
             ),
           ],
         ),
