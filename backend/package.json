@@ -10,12 +10,15 @@
     "dev": "nodemon ./src/Server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "nodemon": "^1.19.3",
+    "pg": "^7.12.1",
     "sequelize": "^5.19.5",
     "sucrase": "^3.10.1",
-    "youch": "^2.0.10"
+    "youch": "^2.0.10",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
