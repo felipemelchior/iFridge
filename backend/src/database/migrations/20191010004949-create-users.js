@@ -25,6 +25,11 @@ module.exports = {
         defaultValue: false,
         allowNull: false,
       },
+      merchant: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
       facebook_token: {
         type: Sequelize.STRING,
         allowNull: true,

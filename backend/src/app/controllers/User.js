@@ -12,6 +12,7 @@ class UserController {
       password: Yup.string()
         .required()
         .min(6),
+      merchant: Yup.boolean(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -24,9 +25,9 @@ class UserController {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const { id, name, email, merchant } = await User.create(req.body);
 
-    return res.json({ id, name, email });
+    return res.json({ id, name, email, merchant });
   }
 }
 
