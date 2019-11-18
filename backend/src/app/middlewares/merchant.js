@@ -5,7 +5,10 @@ export default async (req, res, next) => {
   const userDetails = await User.findByPk(userId);
   const { merchant } = userDetails;
 
-  req.merchant = merchant;
-
-  next();
+  if (merchant) {
+    req.merchant = merchant;
+    next();
+  } else {
+    return res.json({ error: 'Service only available to merchants' });
+  }
 };
