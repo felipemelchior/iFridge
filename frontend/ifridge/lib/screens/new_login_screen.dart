@@ -10,9 +10,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+  ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+  ScreenUtil.instance = ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+
+
     return new Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,

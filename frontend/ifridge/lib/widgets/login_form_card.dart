@@ -7,9 +7,10 @@ class LoginFormCard extends StatefulWidget {
 }
 
 class _LoginFormCardState extends State<LoginFormCard> {
-  bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
+    bool _rememberMeFlag = false;
+    
     return Container(
       width: ScreenUtil.getInstance().setWidth(700),
       height: ScreenUtil.getInstance().setHeight(790),
@@ -194,7 +195,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
               child: FlatButton(
                 color: Colors.white,
                 child: Text(
-                  "Logar com Facebook",
+                  "Logar com Facebook", 
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: "Merriweather",
