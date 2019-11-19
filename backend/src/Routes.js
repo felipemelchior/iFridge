@@ -3,6 +3,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/User';
 import SessionController from './app/controllers/Session';
 import TypesController from './app/controllers/Types';
+import MerchantController from './app/controllers/Merchant';
 
 import authMiddleware from './app/middlewares/auth';
 import merchantMiddleware from './app/middlewares/merchant';
@@ -18,6 +19,11 @@ routes.use(merchantMiddleware);
 
 routes.get('/types', TypesController.index);
 routes.post('/types', TypesController.store);
+
+routes.get('/merchant', MerchantController.index);
+routes.post('/merchant', MerchantController.store);
+routes.put('/merchant', MerchantController.update);
+routes.delete('/merchant', MerchantController.delete);
 
 routes.get('/', (req, res) => {
   return res.json({ message: req.merchant });
