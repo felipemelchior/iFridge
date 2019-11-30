@@ -4,8 +4,9 @@ import databaseConfig from '../config/database';
 
 import User from '../app/models/User';
 import Types from '../app/models/Types';
+import Products from '../app/models/Products';
 
-const models = [User, Types];
+const models = [User, Types, Products];
 
 class Database {
   constructor() {
@@ -16,9 +17,9 @@ class Database {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models.map(model => {
-      model.init(this.connection);
-    });
+    models
+      .map(model => model.init(this.connection))
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 

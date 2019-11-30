@@ -22,8 +22,8 @@ routes.post('/types', TypesController.store);
 
 routes.get('/merchant', MerchantController.index);
 routes.post('/merchant', MerchantController.store);
-routes.put('/merchant', MerchantController.update);
-routes.delete('/merchant', MerchantController.delete);
+routes.put('/merchant/:id', MerchantController.update);
+routes.delete('/merchant/:id', MerchantController.delete);
 
 routes.get('/', (req, res) => {
   return res.json({ message: req.merchant });
