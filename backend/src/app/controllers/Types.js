@@ -19,6 +19,12 @@ class TypesController {
 
     const { name } = req.body;
 
+    const typeExists = await Types.findOne({ where: { name } });
+
+    if (typeExists) {
+      return res.status(400).json({ error: 'Type already exists' });
+    }
+
     await Types.create({ name });
 
     return res.json({ message: 'Type added to database' });
