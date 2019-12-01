@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
@@ -54,4 +55,11 @@ export default function Profile() {
       </button>
     </Container>
   );
+=======
+
+// import { Container } from './styles';
+
+export default function Profile() {
+  return <h1>profile</h1>;
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 }

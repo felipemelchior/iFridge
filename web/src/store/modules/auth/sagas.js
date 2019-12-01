@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 import history from '~/services/history';
 
+<<<<<<< HEAD
 import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
@@ -72,3 +73,25 @@ export default all([
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_OUT', signOut),
 ]);
+=======
+import { signInSuccess } from './actions';
+
+export function* signIn({ payload }) {
+  const { email, password } = payload;
+
+  const response = yield call(api.post, 'sessions', { email, password });
+
+  const { token, user } = response.data;
+
+  if (!user.merchant) {
+    toast.error('Serviço disponível apenas para comerciantes');
+    return;
+  }
+
+  yield put(signInSuccess(token, user));
+
+  history.push('/dashboard');
+}
+
+export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874

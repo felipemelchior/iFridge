@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
+<<<<<<< HEAD
 import 'react-toastify/dist/ReactToastify.css';
 
+=======
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
@@ -25,7 +28,11 @@ export default createGlobalStyle`
   }
 
   body, input, button {
+<<<<<<< HEAD
     font: 14px 'Roboto', sans-serif;
+=======
+    font: 14px 'Roboto' sans-serif;
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
   }
 
   a {

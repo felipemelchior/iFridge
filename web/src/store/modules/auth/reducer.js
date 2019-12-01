@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import produce from 'immer';
 
 const INITIAL_STATE = {
@@ -27,6 +28,12 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.token = null;
         draft.signed = false;
       });
+=======
+const INITIAL_STATE = {};
+
+export default function auth(state = INITIAL_STATE, action) {
+  switch (action.type) {
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
     default:
       return state;
   }

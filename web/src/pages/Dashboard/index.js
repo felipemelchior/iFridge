@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { MdAdd, MdUpdate, MdDeleteForever } from 'react-icons/md';
@@ -91,4 +92,12 @@ export default function Dashboard() {
       </ProductList>
     </Container>
   );
+=======
+import React from 'react';
+
+// import { Container } from './styles';
+
+export default function Dashboard() {
+  return <h1>dashboard</h1>;
+>>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 }
