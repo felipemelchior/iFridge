@@ -1,8 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import { useDispatch } from 'react-redux';
-=======
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
@@ -11,11 +8,8 @@ import logo from '~/assets/logo.svg';
 
 import { Image } from '~/pages/_layouts/auth/styles';
 
-<<<<<<< HEAD
 import { signUpRequest } from '~/store/modules/auth/actions';
 
-=======
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
   email: Yup.string()
@@ -27,15 +21,10 @@ const schema = Yup.object().shape({
 });
 
 export default function SignUp() {
-<<<<<<< HEAD
   const dispatch = useDispatch();
 
   function handleSubmit({ name, email, password }) {
     dispatch(signUpRequest(name, email, password));
-=======
-  function handleSubmit(data) {
-    console.tron.log(data);
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
   }
 
   return (

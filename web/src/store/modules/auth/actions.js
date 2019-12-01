@@ -12,7 +12,6 @@ export function signInSuccess(token, user) {
   };
 }
 
-<<<<<<< HEAD
 export function signUpRequest(name, email, password) {
   return {
     type: '@auth/SIGN_UP_REQUEST',
@@ -20,19 +19,14 @@ export function signUpRequest(name, email, password) {
   };
 }
 
-=======
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
 export function signFailure() {
   return {
     type: '@auth/SIGN_FAILURE',
   };
 }
-<<<<<<< HEAD
 
 export function signOut() {
   return {
     type: '@auth/SIGN_OUT',
   };
 }
-=======
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874

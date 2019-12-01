@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "iFridge-Web",
-=======
-  "name": "modulo09",
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,11 +13,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-<<<<<<< HEAD
     "react-icons": "^3.8.0",
-=======
-    "react-icons": "^3.7.0",
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
     "react-perfect-scrollbar": "^1.5.3",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
@@ -31,11 +23,7 @@
     "reactotron-redux": "^3.1.1",
     "reactotron-redux-saga": "^4.2.2",
     "redux": "^4.0.4",
-<<<<<<< HEAD
     "redux-persist": "^6.0.0",
-=======
-    "redux-persist": "^5.10.0",
->>>>>>> b301c18eed188e88a872075c7fde9ae423bb7874
     "redux-saga": "^1.0.5",
     "styled-components": "^4.4.1",
     "yup": "^0.27.0"
