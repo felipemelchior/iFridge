@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import cors from 'cors';
 import express from 'express';
 import Youch from 'youch';
 
@@ -15,6 +16,7 @@ class App {
   }
 
   middlewares() {
+    this.server.use(cors());
     this.server.use(express.json());
   }
 
