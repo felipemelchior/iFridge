@@ -22,7 +22,7 @@ class _RecipeState extends State<Recipe> {
         theme: ThemeData(primarySwatch: Colors.red),
         home: 
           Scaffold(
-            appBar: AppBar(title: Text('Recipe')),
+            // appBar: AppBar(title: Text('Recipe')),
             body: new Column(children: [
               new Texto(title, 22),
               new ClipRRect(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ifridge/screens/recipe_screen.dart';
 import 'package:ifridge/tabs/fridge_tab.dart';
 import 'package:ifridge/tabs/home_tab.dart';
 import 'package:ifridge/widgets/custom_drawer.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
-          body: Container(),
+          body: Recipe(),
         ),
         Scaffold(
           appBar: AppBar(
