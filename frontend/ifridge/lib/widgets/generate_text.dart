@@ -7,7 +7,12 @@ class Texto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-    padding: EdgeInsets.all(8.0),
+    padding: EdgeInsets.only(
+      left: 0,
+      top: 10,
+      right: 0,
+      bottom: 0,
+    ),
     child: Text(title,
       textAlign: TextAlign.center,
       style: TextStyle(

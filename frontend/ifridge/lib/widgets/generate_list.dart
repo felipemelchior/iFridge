@@ -9,8 +9,15 @@ class Lista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(icons);
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.only(
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+      ),
       itemCount: ingredients.length,
       itemBuilder: (context, index) {
           return Card( //                           <-- Card widget

@@ -22,8 +22,9 @@ class _RecipeState extends State<Recipe> {
         theme: ThemeData(primarySwatch: Colors.red),
         home: 
           Scaffold(
-            // appBar: AppBar(title: Text('Recipe')),
-            body: new Column(children: [
+            body: 
+              SingleChildScrollView(
+                child: new Column(children: [
               new Texto(title, 22),
               new ClipRRect(
                 borderRadius: new BorderRadius.circular(30.0),
@@ -34,10 +35,11 @@ class _RecipeState extends State<Recipe> {
                 ),
               ),
               new Texto('Required Ingredients', 18),
-              new Expanded(child: new Lista(ingredients, icons_ingredients)),
+              new Lista(ingredients, icons_ingredients),
               new Texto('Method of preparation', 18),
-              new Expanded(child: new Lista(steps, icons_steps)),
-            ])
+              new Lista(steps, icons_steps),
+            ]),
+            )  
           )
         );
   }
