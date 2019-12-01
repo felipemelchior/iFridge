@@ -1,7 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-// import { Container } from './styles';
+import logo from '~/assets/logo.svg';
+
+import { Image } from '~/pages/_layouts/auth/styles';
 
 export default function SignUp() {
-  return <h1>signup</h1>;
+  return (
+    <>
+      <Image src={logo} alt="iFridge" />
+      <p>iFridge</p>
+
+      <form>
+        <input type="text" placeholder="Nome Completo" />
+        <input type="email" placeholder="Seu email" />
+        <input type="password" placeholder="Sua senha secreta" />
+
+        <button type="submit">Criar conta</button>
+
+        <Link to="/">Já possui cadastro?</Link>
+      </form>
+    </>
+  );
 }
