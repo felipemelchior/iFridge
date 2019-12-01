@@ -1,13 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
+
+import { signOut } from '~/store/modules/auth/actions';
+import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import { Container, Avatar } from './styles';
 
 export default function Profile() {
+  const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
 
-  function handleSubmit(data) {}
+  function handleSubmit(data) {
+    dispatch(updateProfileRequest(data));
+  }
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
 
   return (
     <Container>
@@ -39,7 +49,9 @@ export default function Profile() {
         <button type="submit">Atualizar perfil</button>
       </Form>
 
-      <button type="button">Sair do iFridge</button>
+      <button type="button" onClick={handleSignOut}>
+        Sair do iFridge
+      </button>
     </Container>
   );
 }

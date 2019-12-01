@@ -15,7 +15,6 @@ export const Content = styled.div`
   max-width: 415px;
   text-align: center;
   background: #fff;
-  /* border-radius: 4px; */
   border-top-right-radius: 40px;
   border-bottom-left-radius: 40px;
 
@@ -27,6 +26,7 @@ export const Content = styled.div`
   p {
     margin-top: 5px;
     opacity: 0.7;
+    font-weight: bold;
   }
 
   form {
