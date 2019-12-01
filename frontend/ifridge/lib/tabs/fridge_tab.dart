@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart' show FontAwesomeIcons;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'
+    show FontAwesomeIcons;
 // import 'package:ifridge/widgets/login_form_card.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class Ingredientes extends StatelessWidget {
   List<String> _ingredientes = ['3x frango', '2x batata', '5x Pimenta'];
 
-      final icons = [Icon(FontAwesomeIcons.hamburger), Icon(FontAwesomeIcons.gamepad),
-      Icon(FontAwesomeIcons.bacon)];
+  final icons = [
+    Icon(FontAwesomeIcons.hamburger),
+    Icon(FontAwesomeIcons.gamepad),
+    Icon(FontAwesomeIcons.bacon)
+  ];
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -21,17 +24,18 @@ class Ingredientes extends StatelessWidget {
       //   child: Center(child: Text(_ingredientes[index])),
       // ),
       itemBuilder: (context, index) {
-          return Card( //                           <-- Card widget
-            child: ListTile(
-              leading: icons[index],
-              // leading: new CircleAvatar(
-              //   backgroundColor: Colors.white,
-              //   child: new Image(image: new AssetImage('assets/frango.jpg')),
-              // ),
-              title: Text(_ingredientes[index]),
-            ),
-          );
-        },
+        return Card(
+          //                           <-- Card widget
+          child: ListTile(
+            leading: icons[index],
+            // leading: new CircleAvatar(
+            //   backgroundColor: Colors.white,
+            //   child: new Image(image: new AssetImage('assets/frango.jpg')),
+            // ),
+            title: Text(_ingredientes[index]),
+          ),
+        );
+      },
     );
   }
 }
@@ -47,14 +51,13 @@ class _FridgeState extends State<Fridge> {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
         home: Scaffold(
-            appBar: AppBar(title: Text('Geladeira')),
-            body: Column(children: [
-              Expanded(child: Ingredientes())
-            ])));
+          // appBar: AppBar(title: Text('Geladeira')),
+          body: Column(children: <Widget>[Expanded(child: Ingredientes())]),
+        ));
   }
 }
 
-class ShapeCurvo extends CustomPainter{
+class ShapeCurvo extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
