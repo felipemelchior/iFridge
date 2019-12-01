@@ -15,7 +15,13 @@ export const Content = styled.div`
   max-width: 415px;
   text-align: center;
   background: #fff;
-  border-radius: 4px;
+  /* border-radius: 4px; */
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
   padding: 20px;
 
   p {
@@ -34,8 +40,14 @@ export const Content = styled.div`
       border-radius: 4px;
       height: 44px;
       padding: 0 15px;
-      color: #fff;
       margin: 0 0 10px;
+    }
+
+    span {
+      color: #f64c75;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
     }
 
     button {
