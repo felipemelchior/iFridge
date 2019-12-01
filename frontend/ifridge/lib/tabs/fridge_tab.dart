@@ -17,7 +17,7 @@ class _FridgeState extends State<Fridge> {
         home: Scaffold(
           // appBar: AppBar(title: Text('Geladeira')),
           body: SingleChildScrollView(
-            child: new Column(children: <Widget>[Lista(ingredients, icons_ingredients)]),
+            child: new Column(children: <Widget>[GenerateList(ingredients, icons_ingredients)]),
     )));
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Texto extends StatelessWidget {
+
+class GenerateText extends StatelessWidget {
   final String title;
   final double size;
-  Texto(this.title, this.size);
+  GenerateText(this.title, this.size);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
