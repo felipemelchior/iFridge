@@ -6,6 +6,8 @@ class Products extends Model {
       {
         name: Sequelize.STRING,
         price: Sequelize.FLOAT,
+        promo_price: Sequelize.FLOAT,
+        promo_activated: Sequelize.BOOLEAN,
       },
       {
         sequelize,
