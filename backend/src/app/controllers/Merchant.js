@@ -7,6 +7,7 @@ class Merchant {
   async index(req, res) {
     const products = await Products.findAll({
       where: { owner_id: req.userId },
+      include: [{ model: Types }],
     });
 
     return res.json(products);

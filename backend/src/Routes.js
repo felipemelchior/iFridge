@@ -15,6 +15,8 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
+routes.put('/users', UserController.update);
+
 routes.use(merchantMiddleware);
 
 routes.get('/types', TypesController.index);

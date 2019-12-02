@@ -10,6 +10,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         merchant: Sequelize.BOOLEAN,
+        address: Sequelize.STRING,
         facebook_connected: Sequelize.BOOLEAN,
         facebook_token: Sequelize.STRING,
       },
