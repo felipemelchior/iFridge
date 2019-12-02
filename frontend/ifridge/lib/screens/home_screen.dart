@@ -12,20 +12,26 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Home",
+              textAlign: TextAlign.center,
+            ),
+          ),
           body: HomeTab(),
           drawer: CustomDrawer(_pageController),
         ),
+        // Scaffold(
+        //   appBar: AppBar(
+        //     title: Text("Receitas"),
+        //     centerTitle: true,
+        //   ),
+        //   drawer: CustomDrawer(_pageController),
+        //   body: Recipe(),
+        // ),
         Scaffold(
           appBar: AppBar(
-            title: Text("Receitas"),
-            centerTitle: true,
-          ),
-          drawer: CustomDrawer(_pageController),
-          body: Recipe(),
-        ),
-        Scaffold(
-          appBar: AppBar(
-            title: Text("Geladeira"),
+            title: Text("Fridge"),
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
