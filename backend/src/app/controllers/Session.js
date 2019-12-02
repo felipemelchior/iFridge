@@ -30,10 +30,10 @@ class SessionController {
     }
 
     // Retornar avatar posteriormente
-    const { id, name, merchant } = user;
+    const { id, name, merchant, address } = user;
 
     return res.json({
-      user: { id, name, email, merchant },
+      user: { id, name, email, address, merchant },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
