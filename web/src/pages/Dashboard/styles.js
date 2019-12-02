@@ -67,11 +67,11 @@ export const HeaderList = styled.ul`
   }
 
   li:nth-child(2) {
-    margin-left: -14px;
+    margin-left: -15px;
   }
 
   li:nth-child(3) {
-    margin-right: 110px;
+    margin-right: 125px;
   }
 `;
 

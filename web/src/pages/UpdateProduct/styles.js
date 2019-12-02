@@ -6,7 +6,10 @@ export const Container = styled.div`
   width: 100%;
   max-width: 415px;
   background: #fff;
-  border-radius: 4px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   margin: 50px auto;
   padding: 15px;
 
