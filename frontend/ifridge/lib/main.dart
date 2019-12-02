@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/new_login_screen.dart';
+
+// import 'screens/new_login_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,9 +11,11 @@ class MyApp extends StatelessWidget {
       title: 'iFridge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.purple,
+        primaryColor: Color.fromARGB(255, 255, 0, 0),
+        
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }
