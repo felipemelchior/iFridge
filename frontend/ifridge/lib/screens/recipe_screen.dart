@@ -9,31 +9,36 @@ class Recipe extends StatefulWidget {
 }
 
 class _RecipeState extends State<Recipe> {
-  List<String> ingredients = ['3x Frangos inteiros', '1x Farinha', '1x litro de óleo'];
-  List<String> steps = ['Empane o frango', 'Jogue no óleo quente', 'Aproveite o frango'];
-  List<int> icons_ingredients = [0,1,2];
-  List<int> icons_steps = [0,0,0];
+  List<String> ingredients = ['1x Whole chicken', '1x Flour', '1x Liter of oil'];
+  List<String> steps = ['Bread the chicken gently', 'Throw it up and get the pan with the hot oil', 'Enjoy the chicken'];
+  List<String> icons_ingredients = ['https://i.ytimg.com/vi/Hq2pavmew58/maxresdefault.jpg','https://assets.xtechcommerce.com/uploads/images/medium/73750f362e4bb6daa20ecf0bf427e74a.jpeg','https://s3.portalt5.com.br/imagens/oleos.jpg?mtime=20180212121934'];
+  List<String> icons_steps = ['https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791', 'https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791', 'https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791'];
+  String title = 'Fried chicken';
+  String profile = 'https://www.jessicagavin.com/wp-content/uploads/2014/01/buttermilk-fried-chicken-11-1200-150x150.jpg';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
-        home: Scaffold(
-            appBar: AppBar(title: Text('Receita')),
+        home: 
+          Scaffold(
+            // appBar: AppBar(title: Text('Recipe')),
             body: new Column(children: [
-              new Texto('Frango frito', 28),
+              new Texto(title, 22),
               new ClipRRect(
                 borderRadius: new BorderRadius.circular(30.0),
                 child: Image.network(
-                  'https://www.jessicagavin.com/wp-content/uploads/2014/01/buttermilk-fried-chicken-11-1200-150x150.jpg',
-                  height: 150.0,
-                  width: 150.0,
+                  profile,
+                  height: 110.0,
+                  width: 110.0,
                 ),
               ),
-              new Texto('Ingredientes necessários', 18),
+              new Texto('Required Ingredients', 18),
               new Expanded(child: new Lista(ingredients, icons_ingredients)),
-              new Texto('Modo de preparo', 18),
+              new Texto('Method of preparation', 18),
               new Expanded(child: new Lista(steps, icons_steps)),
-            ])));
+            ])
+          )
+        );
   }
 }
