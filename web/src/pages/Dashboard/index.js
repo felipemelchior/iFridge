@@ -23,7 +23,6 @@ export default function Dashboard() {
     loadProducts();
   }, []);
 
-
   function handleNewType() {
     history.push('/type');
   }
