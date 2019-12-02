@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:ifridge/screens/recipe_screen.dart';
 
 class HomeTab extends StatefulWidget {
   @override
@@ -18,12 +19,12 @@ class _HomeTabState extends State<HomeTab> {
 
     if (_search == null || _search.isEmpty)
       response = await http.get(
-          "https://api.spoonacular.com/recipes/random?apiKey=0adbad720c1c45c2929c6f973c87bdec&number=20");
+          "https://api.spoonacular.com/recipes/random?apiKey=04854e690d41401187e49dc4adb86271&number=20");
     else
       response = await http.get(
-          "https://api.spoonacular.com/recipes/complexSearch?apiKey=0adbad720c1c45c2929c6f973c87bdec&query=$_search&includeIngredients?$_search&number=20&offset=$_offset");
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey=04854e690d41401187e49dc4adb86271&query=$_search&includeIngredients?$_search&number=20&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
 
-    print(json.decode(response.body));
+    // print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -73,7 +74,7 @@ class _HomeTabState extends State<HomeTab> {
                     height: 200,
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                       strokeWidth: 5.0,
                     ),
                   );
@@ -130,12 +131,13 @@ class _HomeTabState extends State<HomeTab> {
               ],
             ),
             onTap: () {
-              print("RecipeScreen");
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             RecipePage2(snapshot.data["recipes"][index])));
+              // print("AAAAAAAAA");
+              // print(snapshot.data["results"][index]);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Recipe(snapshot.data["results"][index])));
             },
             onLongPress: () {
             },
