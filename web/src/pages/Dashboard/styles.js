@@ -41,18 +41,25 @@ export const ProductList = styled.ul`
   background: #fff;
 `;
 
-export const HeaderList = styled.li`
+export const HeaderList = styled.ul`
   padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  p {
-    width: 400px;
+  li {
     font-size: 14px;
     font-weight: bold;
     color: #d1191d;
+  }
+
+  li:nth-child(2) {
+    margin-left: -14px;
+  }
+
+  li:nth-child(3) {
+    margin-right: 110px;
   }
 `;
 
@@ -70,7 +77,7 @@ export const Product = styled.li`
   }
 
   p {
-    width: 400px;
+    width: 80px;
     font-size: 14px;
   }
 

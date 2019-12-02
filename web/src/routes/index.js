@@ -10,6 +10,7 @@ import Profile from '~/pages/Profile';
 
 import NewProduct from '~/pages/NewProduct';
 import NewType from '~/pages/NewType';
+import UpdateProduct from '~/pages/UpdateProduct';
 
 export default function Routes() {
   return (
@@ -22,6 +23,7 @@ export default function Routes() {
 
       <Route path="/product" component={NewProduct} isPrivate />
       <Route path="/type" component={NewType} isPrivate />
+      <Route path="/update" component={UpdateProduct} isPrivate />
 
       <Route path="/" component={() => <h1>404</h1>} />
     </Switch>
