@@ -28,12 +28,13 @@ export default function NewProduct() {
     loadTypes();
   }, []);
 
-  function handleSubmit({ name, type_id, price }) {
+  function handleSubmit({ name, type_id, price, promo_price }) {
     api
       .post('/merchant', {
         name,
         type_id,
         price,
+        promo_price,
       })
       .then(() => {
         toast.success('Produto adicionado com sucesso!');
@@ -63,6 +64,16 @@ export default function NewProduct() {
             step="0.01"
             name="price"
             placeholder="Preço do produto"
+          />
+        </div>
+
+        <div>
+          <MdAttachMoney size={32} color="#000" />
+          <Input
+            type="number"
+            step="0.01"
+            name="promo_price"
+            placeholder="Preço em promoção"
           />
         </div>
         <button type="submit">Criar novo produto</button>

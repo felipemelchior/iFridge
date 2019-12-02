@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MdAdd, MdUpdate, MdDeleteForever } from 'react-icons/md';
+import { FaTag } from 'react-icons/fa';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -43,6 +44,27 @@ export default function Dashboard() {
     }
   }
 
+  async function handlePromotion(id, promo_activated) {
+    const response = await api
+      .put(`/merchant/${id}`, {
+        promo_activated,
+      })
+      .then(() => {
+        if (promo_activated) {
+          toast.success('Produto adicionado a lista de promoções!');
+        } else {
+          toast.success('Produto retirado da lista de promoções!');
+        }
+      })
+      .catch(() => {
+        toast.error(
+          'Não foi possível adicionar este produto a lista de promoções'
+        );
+      });
+
+    loadProducts();
+  }
+
   return (
     <Container>
       <div>
@@ -71,8 +93,29 @@ export default function Dashboard() {
             <Product key={product.id}>
               <p>{product.name}</p>
               <p>{product.Type.name}</p>
-              <p>R$ {product.price}</p>
+              <p>
+                ${' '}
+                {product.promo_activated ? product.promo_price : product.price}
+              </p>
               <div>
+                {product.promo_activated ? (
+                  <FaTag
+                    onClick={() =>
+                      handlePromotion(product.id, !product.promo_activated)
+                    }
+                    size={20}
+                    color="#FFD700"
+                  />
+                ) : (
+                  <FaTag
+                    onClick={() =>
+                      handlePromotion(product.id, !product.promo_activated)
+                    }
+                    size={20}
+                    color="#000"
+                  />
+                )}
+
                 <Link to={{ pathname: '/update', state: product }}>
                   <MdUpdate size={24} color="#000" />
                 </Link>
