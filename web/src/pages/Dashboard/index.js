@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MdAdd, MdUpdate, MdDeleteForever } from 'react-icons/md';
 
@@ -30,10 +31,6 @@ export default function Dashboard() {
     history.push('/product');
   }
 
-  function handleUpdate(id) {
-    console.log('click');
-  }
-
   async function handleDelete(id) {
     const response = await api.delete(`/merchant/${id}`);
 
@@ -62,8 +59,9 @@ export default function Dashboard() {
 
       <ProductList>
         <HeaderList>
-          <p>Nome do produto</p>
-          <p>Preço</p>
+          <li>Nome do produto</li>
+          <li>Tipo de produto</li>
+          <li>Preço</li>
           <div />
         </HeaderList>
         {loading ? (
@@ -72,13 +70,12 @@ export default function Dashboard() {
           products.map(product => (
             <Product key={product.id}>
               <p>{product.name}</p>
+              <p>{product.Type.name}</p>
               <p>R$ {product.price}</p>
               <div>
-                <MdUpdate
-                  onClick={() => handleUpdate(product.id)}
-                  size={24}
-                  color="#000"
-                />
+                <Link to={{ pathname: '/update', state: product }}>
+                  <MdUpdate size={24} color="#000" />
+                </Link>
                 <MdDeleteForever
                   onClick={() => handleDelete(product.id)}
                   size={24}

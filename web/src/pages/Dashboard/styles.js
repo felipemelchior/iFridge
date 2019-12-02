@@ -19,7 +19,13 @@ export const Container = styled.div`
     margin-bottom: 10px;
     font-weight: bold;
     border: 2px solid #d1191d;
-    border-radius: 4px;
+
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
     transition: background 0.2s;
 
     &:hover {
@@ -37,22 +43,35 @@ export const ProductList = styled.ul`
   width: 100%;
   max-width: 900px;
   padding: 10px;
-  border-radius: 4px;
+
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
   background: #fff;
 `;
 
-export const HeaderList = styled.li`
+export const HeaderList = styled.ul`
   padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  p {
-    width: 400px;
+  li {
     font-size: 14px;
     font-weight: bold;
     color: #d1191d;
+  }
+
+  li:nth-child(2) {
+    margin-left: -14px;
+  }
+
+  li:nth-child(3) {
+    margin-right: 110px;
   }
 `;
 
@@ -70,12 +89,13 @@ export const Product = styled.li`
   }
 
   p {
-    width: 400px;
+    width: 80px;
     font-size: 14px;
   }
 
   div {
     svg {
+      border-radius: 5px;
       transition: background 0.2s;
 
       &:hover {

@@ -8,8 +8,9 @@ import { Container } from './styles';
 import api from '~/services/api';
 import history from '~/services/history';
 
-export default function NewProduct() {
+export default function UpdateProduct({ location }) {
   const [types, setTypes] = useState([]);
+  const { state: product } = location;
 
   useEffect(() => {
     async function loadTypes() {
@@ -30,26 +31,26 @@ export default function NewProduct() {
 
   function handleSubmit({ name, type_id, price }) {
     api
-      .post('/merchant', {
+      .put(`/merchant/${product.id}`, {
         name,
         type_id,
         price,
       })
       .then(() => {
-        toast.success('Produto adicionado com sucesso!');
+        toast.success('Produto alterado com sucesso!');
         history.push('/');
       })
       .catch(() => {
-        toast.error('Não foi possível adicionar este produto');
+        toast.error('Não foi possível alterar este produto');
       });
   }
 
   return (
     <Container>
-      <h1>Adicionar novo produto</h1>
+      <h1>Alterar produto</h1>
       <hr />
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} initialData={product}>
         <Input type="text" name="name" placeholder="Nome do produto" />
         <Select
           name="type_id"
@@ -65,7 +66,7 @@ export default function NewProduct() {
             placeholder="Preço do produto"
           />
         </div>
-        <button type="submit">Criar novo produto</button>
+        <button type="submit">Alterar produto</button>
       </Form>
     </Container>
   );

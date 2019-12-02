@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { Container } from './styles';
 
@@ -19,6 +20,7 @@ export default function NewType() {
       .post('/types', { name })
       .then(() => {
         toast.success('Tipo adicionado com sucesso!');
+        history.push('/');
       })
       .catch(() => {
         toast.error('Não foi possível adicionar este tipo');

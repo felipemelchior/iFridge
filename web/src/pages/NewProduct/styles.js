@@ -8,7 +8,12 @@ export const Container = styled.div`
   margin: 50px auto;
   background: #fff;
   padding: 15px;
-  border-radius: 4px;
+
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
   h1 {
     text-align: center;
@@ -82,7 +87,7 @@ export const Container = styled.div`
     }
 
     button {
-      margin: 5px 0 0;
+      margin: 5px 0 5px;
       height: 44px;
       background: #3b9eff;
       font-weight: bold;

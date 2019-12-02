@@ -4,16 +4,11 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
-  background: #fff;
-  margin: 50px auto;
   max-width: 415px;
+  background: #fff;
+  border-radius: 4px;
+  margin: 50px auto;
   padding: 15px;
-
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 
   h1 {
     text-align: center;
@@ -47,8 +42,47 @@ export const Container = styled.div`
       margin: 0 0 10px;
     }
 
+    select {
+      background: rgba(0, 0, 0, 0.1);
+      border: 0;
+      border-radius: 4px;
+      height: 44px;
+      padding: 0 15px;
+      margin: 0 0 10px;
+
+      option {
+        background: rgba(0, 0, 0, 0.1);
+        border: 0;
+        border-radius: 4px;
+        height: 44px;
+        padding: 0 15px;
+        margin: 0 0 10px;
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+
+      svg {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+
+        height: 44px;
+        padding-left: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+
+      > input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 100%;
+      }
+    }
+
     button {
-      margin: 5px 0 5px;
+      margin: 5px 0 0;
       height: 44px;
       background: #3b9eff;
       font-weight: bold;
