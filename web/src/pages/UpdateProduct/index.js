@@ -29,12 +29,13 @@ export default function UpdateProduct({ location }) {
     loadTypes();
   }, []);
 
-  function handleSubmit({ name, type_id, price }) {
+  function handleSubmit({ name, type_id, price, promo_price }) {
     api
       .put(`/merchant/${product.id}`, {
         name,
         type_id,
         price,
+        promo_price,
       })
       .then(() => {
         toast.success('Produto alterado com sucesso!');
@@ -63,6 +64,16 @@ export default function UpdateProduct({ location }) {
             type="number"
             step="0.01"
             name="price"
+            placeholder="Preço do produto"
+          />
+        </div>
+
+        <div>
+          <MdAttachMoney size={32} color="#000" />
+          <Input
+            type="number"
+            step="0.01"
+            name="promo_price"
             placeholder="Preço do produto"
           />
         </div>
