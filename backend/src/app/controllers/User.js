@@ -6,6 +6,9 @@ class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
+      address: Yup.string()
+        .required()
+        .required(),
       email: Yup.string()
         .email()
         .required(),
@@ -25,14 +28,15 @@ class UserController {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email, merchant } = await User.create(req.body);
+    const { id, name, email, address, merchant } = await User.create(req.body);
 
-    return res.json({ id, name, email, merchant });
+    return res.json({ id, name, email, address, merchant });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
+      address: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
@@ -69,9 +73,9 @@ class UserController {
 
     await user.update(req.body);
 
-    const { id, name } = await User.findByPk(req.userId);
+    const { id, name, address } = await User.findByPk(req.userId);
 
-    return res.json({ id, name, email });
+    return res.json({ id, name, email, address });
   }
 }
 

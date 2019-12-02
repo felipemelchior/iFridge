@@ -14,6 +14,6 @@ export function updateProfileSuccess(profile) {
 
 export function updateProfileFailure() {
   return {
-    type: '@user/UPDATE_PROFILE_SUCCESS',
+    type: '@user/UPDATE_FAILURE',
   };
 }
