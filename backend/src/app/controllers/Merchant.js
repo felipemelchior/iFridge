@@ -18,13 +18,14 @@ class Merchant {
       name: Yup.string().required(),
       type_id: Yup.number().required(),
       price: Yup.string().required(),
+      promo_price: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation Fails' });
     }
 
-    const { name, type_id, price } = req.body;
+    const { name, type_id, price, promo_price } = req.body;
 
     const productExists = await Products.findOne({
       where: { name, owner_id: req.userId },
@@ -44,6 +45,8 @@ class Merchant {
       name,
       type_id,
       price,
+      promo_price,
+      promo_activated: false,
       owner_id: req.userId,
     });
     return res.status(200).json(newProduct);
@@ -54,6 +57,8 @@ class Merchant {
       name: Yup.string(),
       type_id: Yup.number(),
       price: Yup.string(),
+      promo_price: Yup.string(),
+      promo_activated: Yup.boolean(),
     });
 
     if (!(await schema.isValid(req.body))) {
