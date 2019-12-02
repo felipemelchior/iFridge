@@ -2,23 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { MdAttachMoney } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import * as Yup from 'yup';
 
 import { Container } from './styles';
 
 import api from '~/services/api';
-
-const schema = Yup.object().shape({
-  name: Yup.string('O campo deve conter um texto').required(
-    'Campo Nome é requerido'
-  ),
-  type: Yup.number('Selecione um tipo válido').required(
-    'Campo Tipo é requerido'
-  ),
-  price: Yup.number('Insira um preço válido').required(
-    'Campo Preço é requerido'
-  ),
-});
+import history from '~/services/history';
 
 export default function NewProduct() {
   const [types, setTypes] = useState([]);
@@ -49,6 +37,7 @@ export default function NewProduct() {
       })
       .then(() => {
         toast.success('Produto adicionado com sucesso!');
+        history.push('/');
       })
       .catch(() => {
         toast.error('Não foi possível adicionar este produto');
