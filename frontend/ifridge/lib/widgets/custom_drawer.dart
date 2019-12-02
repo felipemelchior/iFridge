@@ -8,11 +8,12 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget _buildDrawerBack() => Container(
+          // color: Colors.red,
           decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              // Color.fromARGB(200, 255, 68, 0),
-              // Color.fromARGB(0, 255, 68, 0),
+              Color.fromARGB(255,255,0,0),
+              Color.fromARGB(250,255,0,0),
               Colors.red,
               Colors.orangeAccent
             ],
@@ -38,7 +39,7 @@ class CustomDrawer extends StatelessWidget {
                       top: 8,
                       left: 0,
                       child: Text(
-                        "iFridge, se eu cozinho\n é meu?",
+                        "iFridge, I cooked \n is it mine?",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -52,7 +53,7 @@ class CustomDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Olá, Cleiton!",
+                              "Hello, Cleiton!",
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -68,11 +69,31 @@ class CustomDrawer extends StatelessWidget {
           ListView(
             padding: EdgeInsets.only(left: 0, top: 16),
             children: <Widget>[
-              SizedBox(height: 120,),
+              SizedBox(
+                height: 120,
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Divider(
+                      color: Colors.white,
+                      thickness: 3,
+                    ),
+                  ),
+                  Text("X",style: TextStyle(fontSize: 20, color: Colors.white),),
+                  Expanded(
+                    child: Divider(
+                      color: Colors.white,
+                      thickness: 3,
+                    ),
+                  ),
+                ],
+              ),
+              DrawerTile(Icons.home, "Home", pageController, 0),
               Divider(),
-              DrawerTile(Icons.home, "Início", pageController, 0),
-              DrawerTile(Icons.list, "Receitas", pageController, 1),
-              DrawerTile(Icons.fastfood, "Geladeira", pageController, 2),
+              // DrawerTile(Icons.list, "Recipe", pageController, 1),
+              DrawerTile(Icons.fastfood, "Fridge", pageController, 1),
+              Divider()
             ],
           ),
         ],
