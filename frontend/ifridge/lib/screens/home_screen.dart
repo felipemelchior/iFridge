@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         ),
         // Scaffold(
         //   appBar: AppBar(
-        //     title: Text("Receitas"),
+        //     title: Text("Recipes"),
         //     centerTitle: true,
         //   ),
         //   drawer: CustomDrawer(_pageController),

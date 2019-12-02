@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
       title: 'iFridge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        primaryColor: Color.fromARGB(255, 255, 0, 0),
+        primarySwatch: Colors.red,
+        primaryColor: Colors.red,
+        // primaryColor: Color.fromARGB(255, 255, 0, 0),
         
       ),
       home: HomeScreen(),

@@ -7,7 +7,7 @@ class GenerateList extends StatelessWidget {
   GenerateList(this.ingredients, this.icons);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contex) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
