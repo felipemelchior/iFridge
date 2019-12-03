@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import cepPromise from 'cep-promise';
+import api from '../../services/api';
 
 import User from '../models/User';
 
@@ -15,6 +17,7 @@ class UserController {
       password: Yup.string()
         .required()
         .min(6),
+      cep: Yup.string().required(),
       merchant: Yup.boolean(),
     });
 
@@ -28,15 +31,50 @@ class UserController {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email, address, merchant } = await User.create(req.body);
+    const { name, email, address, password, merchant, cep } = req.body;
 
-    return res.json({ id, name, email, address, merchant });
+    const { street, city } = await cepPromise(cep);
+
+    const string = `${street
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ /g, '+') || ''}+${city
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ /g, '+') || ''}`;
+
+    const response = await api.get(string);
+
+    const { lat, lon } = response.data[0];
+
+    const { id } = await User.create({
+      name,
+      email,
+      address,
+      password,
+      merchant,
+      cep,
+      latitude: lat,
+      longitude: lon,
+    });
+
+    return res.json({
+      id,
+      name,
+      email,
+      address,
+      merchant,
+      cep,
+      lat,
+      lon,
+    });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
       address: Yup.string(),
+      cep: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
