@@ -15,6 +15,7 @@ export default function NewProduct() {
     async function loadTypes() {
       const response = await api.get('/types');
 
+      // eslint-disable-next-line array-callback-return
       response.data.map(type => {
         type.title = type.name;
         delete type.name;

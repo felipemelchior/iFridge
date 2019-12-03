@@ -32,6 +32,7 @@ export default function Profile() {
         <Input name="name" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu endereço de e-mail" />
         <Input name="address" placeholder="Endereço comercial" />
+        <Input name="cep_address" placeholder="Endereço comercial" />
 
         <hr />
 

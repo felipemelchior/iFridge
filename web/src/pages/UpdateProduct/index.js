@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { MdAttachMoney } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -16,6 +17,7 @@ export default function UpdateProduct({ location }) {
     async function loadTypes() {
       const response = await api.get('/types');
 
+      // eslint-disable-next-line array-callback-return
       response.data.map(type => {
         type.title = type.name;
         delete type.name;
@@ -82,3 +84,9 @@ export default function UpdateProduct({ location }) {
     </Container>
   );
 }
+
+UpdateProduct.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.element,
+  }).isRequired,
+};

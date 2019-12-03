@@ -45,7 +45,7 @@ export default function Dashboard() {
   }
 
   async function handlePromotion(id, promo_activated) {
-    const response = await api
+    await api
       .put(`/merchant/${id}`, {
         promo_activated,
       })
