@@ -32,12 +32,13 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, address, password } = payload;
+    const { name, email, address, cep, password } = payload;
 
     yield call(api.post, '/users', {
       name,
       email,
       address,
+      cep,
       password,
       merchant: true,
     });
