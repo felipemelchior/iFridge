@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ifridge/widgets/generate_list.dart';
 import 'package:ifridge/widgets/generate_text.dart';
+import 'package:http/http.dart' as http;
 
 class Recipe extends StatefulWidget {
   final Map _recipeData;
@@ -40,24 +42,34 @@ class _RecipeState extends State<Recipe> {
   String profile =
       'https://www.jessicagavin.com/wp-content/uploads/2014/01/buttermilk-fried-chicken-11-1200-150x150.jpg';
 
+
   void _prepareList() {
-    //  for ingredient in this._recipeData[]
     this.profile = this._recipeData["image"];
     this.title = this._recipeData["title"];
-    // this.ingredients = List();
-    // this.icons_ingredients = List();
+    this.ingredients = List();
+    this.icons_ingredients = List();
     this.steps = List();
     this.icons_steps = List();
     String icon = 'https://i.pinimg.com/originals/8d/11/6a/8d116aa75e0a4e779b57682e0a92c84d.jpg';
 
-    for(var i in this._recipeData.keys){
-      print(i);
+    if(this._recipeData.keys.contains("extendedIngredients")){
+      for(var i in this._recipeData['extendedIngredients']){
+        this.ingredients.add(i["original"].toString());
+        this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+i['image']);
+      }
     }
-
-    // for(var i in this._recipeData['extendedIngredients']){
-    //   this.ingredients.add(i["original"].toString());
-    //   this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+i['image']);
-    // }
+    else if(this._recipeData.keys.contains("id")){
+      for(var i in this._recipeData['analyzedInstructions']){
+        for(var j in i['steps']){
+          for(var k in j['ingredients']){
+            if(!this.ingredients.contains(k["name"].toString())){
+              this.ingredients.add(k["name"].toString());
+              this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+k['image']);
+            }
+          }
+        }
+      }
+    }
 
     for(var i in this._recipeData['analyzedInstructions']){
       for(var j in i['steps']){
