@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ifridge/widgets/generate_list.dart';
 import 'package:ifridge/widgets/generate_text.dart';
-import 'package:http/http.dart' as http;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Recipe extends StatefulWidget {
   final Map _recipeData;
@@ -90,19 +89,61 @@ class _RecipeState extends State<Recipe> {
         home: Scaffold(
             body: SingleChildScrollView(
           child: new Column(children: [
-            new SizedBox(height: 15),
-            new GenerateText(title, 22),
+            // new SizedBox(height: 15),
             new ClipRRect(
-              borderRadius: new BorderRadius.circular(30.0),
+              borderRadius: new BorderRadius.circular(0.0),
               child: Image.network(
                 profile,
-                height: 110.0,
-                width: 110.0,
+                // height: 110.0,
+                // width: 110.0,
               ),
             ),
-            new GenerateText('Required Ingredients', 18),
+            GenerateText(title, 22),
+            SizedBox(height: 15),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Divider(
+                    color: Colors.red[200],
+                    // thickness: 3,
+                  ),
+                ),
+                Text(' '),
+                Icon(FontAwesomeIcons.shoppingCart, color: Colors.red[200],),
+                Text(' '),
+                Expanded(
+                  child: Divider(
+                    color: Colors.red[200],
+                    // thickness: 3,
+                  ),
+                ),
+              ],
+            ),
+            GenerateText('Required Ingredients', 18),
+            Divider(color: Colors.red[200]),
             new GenerateList(ingredients, icons_ingredients),
-            new GenerateText('Method of preparation', 18),
+            SizedBox(height: 15),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Divider(
+                    color: Colors.red[200],
+                    // thickness: 3,
+                  ),
+                ),
+                Text(' '),
+                Icon(FontAwesomeIcons.book, color: Colors.red[200],),
+                Text(' '),
+                Expanded(
+                  child: Divider(
+                    color: Colors.red[200],
+                    // thickness: 3,
+                  ),
+                ),
+              ],
+            ),
+            GenerateText('Method of preparation', 18),
+            Divider(color: Colors.red[200]),
             new GenerateList(steps, icons_steps),
           ]),
         )));
