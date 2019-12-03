@@ -43,6 +43,17 @@ export const Content = styled.div`
       margin: 0 0 10px;
     }
 
+    > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      input {
+        width: 49%;
+      }
+    }
+
     span {
       color: #f64c75;
       align-self: flex-start;

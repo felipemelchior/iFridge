@@ -24,8 +24,8 @@ const schema = Yup.object().shape({
 export default function SignUp() {
   const dispatch = useDispatch();
 
-  function handleSubmit({ name, email, address, password }) {
-    dispatch(signUpRequest(name, email, address, password));
+  function handleSubmit({ name, email, address, cep_address, password }) {
+    dispatch(signUpRequest(name, email, address, cep_address, password));
   }
 
   return (
@@ -36,7 +36,10 @@ export default function SignUp() {
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="Seu email" />
-        <Input name="address" type="text" placeholder="Endereço comercial" />
+        <div>
+          <Input name="address" type="text" placeholder="Endereço comercial" />
+          <Input name="cep_address" type="text" placeholder="Seu CEP" />
+        </div>
         <Input
           name="password"
           type="password"
