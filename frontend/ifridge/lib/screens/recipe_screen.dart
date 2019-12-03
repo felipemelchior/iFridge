@@ -31,10 +31,11 @@ class _RecipeState extends State<Recipe> {
     'https://s3.portalt5.com.br/imagens/oleos.jpg?mtime=20180212121934'
   ];
   List<String> icons_steps = [
-    'https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791',
-    'https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791',
-    'https://cdn.shopify.com/s/files/1/2131/5111/products/red-mobile-1.jpg?v=1571156791'
+    'https://image.flaticon.com/icons/png/512/53/53569.png',
+    'https://image.flaticon.com/icons/png/512/53/53569.png',
+    'https://image.flaticon.com/icons/png/512/53/53569.png'
   ];
+
   String title = 'Fried chicken';
   String profile =
       'https://www.jessicagavin.com/wp-content/uploads/2014/01/buttermilk-fried-chicken-11-1200-150x150.jpg';
@@ -43,22 +44,25 @@ class _RecipeState extends State<Recipe> {
     //  for ingredient in this._recipeData[]
     this.profile = this._recipeData["image"];
     this.title = this._recipeData["title"];
-    this.ingredients = List();
-    this.icons_ingredients = List();
+    // this.ingredients = List();
+    // this.icons_ingredients = List();
     this.steps = List();
     this.icons_steps = List();
+    String icon = 'https://i.pinimg.com/originals/8d/11/6a/8d116aa75e0a4e779b57682e0a92c84d.jpg';
 
-    print(this.icons_ingredients.runtimeType);
-
-    for(var i in this._recipeData['extendedIngredients']){
-      this.ingredients.add(i["original"].toString());
-      this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+i['image']);
+    for(var i in this._recipeData.keys){
+      print(i);
     }
+
+    // for(var i in this._recipeData['extendedIngredients']){
+    //   this.ingredients.add(i["original"].toString());
+    //   this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+i['image']);
+    // }
 
     for(var i in this._recipeData['analyzedInstructions']){
       for(var j in i['steps']){
         this.steps.add(j['step']);
-        this.icons_steps.add(profile);
+        this.icons_steps.add(icon);
       }
     }
     

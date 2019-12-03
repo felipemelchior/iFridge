@@ -13,18 +13,22 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String _search;
   int _offset = 0;
+  String api_key = '1e6b25ce6a514cb7b3636235f294833a';
+  String amount = '20';
 
   Future<Map> _getSearch() async {
     http.Response response;
 
     if (_search == null || _search.isEmpty)
       response = await http.get(
-          "https://api.spoonacular.com/recipes/random?apiKey=04854e690d41401187e49dc4adb86271&number=20");
+          "https://api.spoonacular.com/recipes/random?apiKey="+api_key+"&number="+amount);
     else
       response = await http.get(
-          "https://api.spoonacular.com/recipes/complexSearch?apiKey=04854e690d41401187e49dc4adb86271&query=$_search&includeIngredients?$_search&number=20&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
+          // "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+_search+"&number="+amount+"&apiKey="+api_key);
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey="+api_key+"&query=$_search&includeIngredients?$_search&number="+amount+"&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
 
     // print(json.decode(response.body));
+    // print("https://api.spoonacular.com/recipes/findByIngredients?ingredients="+_search+"&number="+amount+"&apiKey="+api_key);
     return json.decode(response.body);
   }
 
