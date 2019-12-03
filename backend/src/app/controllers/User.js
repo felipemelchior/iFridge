@@ -35,13 +35,21 @@ class UserController {
 
     const { street, city } = await cepPromise(cep);
 
-    const string = `${street
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/ /g, '+') || ''}+${city
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/ /g, '+') || ''}`;
+    const string = `${
+      street
+        ? street
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/ /g, '+')
+        : ''
+    }+${
+      city
+        ? city
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/ /g, '+')
+        : ''
+    }`;
 
     const response = await api.get(string);
 
