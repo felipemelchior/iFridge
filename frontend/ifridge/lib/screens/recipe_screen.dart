@@ -48,9 +48,11 @@ class _RecipeState extends State<Recipe> {
     this.steps = List();
     this.icons_steps = List();
 
+    print(this.icons_ingredients.runtimeType);
+
     for(var i in this._recipeData['extendedIngredients']){
       this.ingredients.add(i["original"].toString());
-      this.icons_ingredients.add(profile);
+      this.icons_ingredients.add('https://spoonacular.com/cdn/ingredients_100x100/'+i['image']);
     }
 
     for(var i in this._recipeData['analyzedInstructions']){
