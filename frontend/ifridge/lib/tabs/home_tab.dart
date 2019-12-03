@@ -196,12 +196,12 @@ class _HomeTabState extends State<HomeTab> {
             ],
           ),
           onTap: () {
-            print("RecipeScreen");
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             RecipePage2(snapshot.data["recipes"][index])));
+            // print("RecipeScreen");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Recipe(snapshot.data["recipes"][index])));
           },
           onLongPress: () {
           },

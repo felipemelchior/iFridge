@@ -43,12 +43,23 @@ class _RecipeState extends State<Recipe> {
     //  for ingredient in this._recipeData[]
     this.profile = this._recipeData["image"];
     this.title = this._recipeData["title"];
-    print('AAAAAAAAA');
+    this.ingredients = List();
+    this.icons_ingredients = List();
+    this.steps = List();
+    this.icons_steps = List();
 
-    // for(var i in this._recipeData["missedIngredients"]){
-    //   print(i);
-    //   // this.ingredients.add(i["original"].toString());
-    // }
+    for(var i in this._recipeData['extendedIngredients']){
+      this.ingredients.add(i["original"].toString());
+      this.icons_ingredients.add(profile);
+    }
+
+    for(var i in this._recipeData['analyzedInstructions']){
+      for(var j in i['steps']){
+        this.steps.add(j['step']);
+        this.icons_steps.add(profile);
+      }
+    }
+    
   }
 
   @override
@@ -61,6 +72,7 @@ class _RecipeState extends State<Recipe> {
         home: Scaffold(
             body: SingleChildScrollView(
           child: new Column(children: [
+            new SizedBox(height: 15),
             new GenerateText(title, 22),
             new ClipRRect(
               borderRadius: new BorderRadius.circular(30.0),
