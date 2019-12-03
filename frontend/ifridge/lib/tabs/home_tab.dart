@@ -13,18 +13,19 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String _search;
   int _offset = 0;
+  String api_key = '1fcdbffc93f74a26ad465152b956ea6f';
+  String amount = '20';
 
   Future<Map> _getSearch() async {
     http.Response response;
 
     if (_search == null || _search.isEmpty)
       response = await http.get(
-          "https://api.spoonacular.com/recipes/random?apiKey=04854e690d41401187e49dc4adb86271&number=20");
+          "https://api.spoonacular.com/recipes/random?apiKey="+api_key+"&number="+amount);
     else
       response = await http.get(
-          "https://api.spoonacular.com/recipes/complexSearch?apiKey=04854e690d41401187e49dc4adb86271&query=$_search&includeIngredients?$_search&number=20&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey="+api_key+"&query=$_search&includeIngredients?$_search&number="+amount+"&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
 
-    // print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -196,12 +197,12 @@ class _HomeTabState extends State<HomeTab> {
             ],
           ),
           onTap: () {
-            print("RecipeScreen");
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             RecipePage2(snapshot.data["recipes"][index])));
+            // print("RecipeScreen");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Recipe(snapshot.data["recipes"][index])));
           },
           onLongPress: () {
           },
