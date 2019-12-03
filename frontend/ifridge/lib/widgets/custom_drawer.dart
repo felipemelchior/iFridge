@@ -91,8 +91,8 @@ class CustomDrawer extends StatelessWidget {
               ),
               DrawerTile(Icons.home, "Home", pageController, 0),
               Divider(),
-              DrawerTile(Icons.list, "Recipe", pageController, 1),
-              DrawerTile(Icons.fastfood, "Fridge", pageController, 2),
+              // DrawerTile(Icons.list, "Recipe", pageController, 1),
+              DrawerTile(Icons.fastfood, "Fridge", pageController, 1),
               Divider()
             ],
           ),
