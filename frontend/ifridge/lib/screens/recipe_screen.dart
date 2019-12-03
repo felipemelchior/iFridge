@@ -81,8 +81,6 @@ class _RecipeState extends State<Recipe> {
 
   @override
   Widget build(BuildContext context) {
-    // print("AAAAAA");
-    // print(this._recipeData);
     _prepareList();
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
@@ -105,22 +103,20 @@ class _RecipeState extends State<Recipe> {
                 Expanded(
                   child: Divider(
                     color: Colors.red[200],
-                    // thickness: 3,
+                    thickness: 2,
                   ),
                 ),
-                Text(' '),
-                Icon(FontAwesomeIcons.shoppingCart, color: Colors.red[200],),
-                Text(' '),
+                Icon(FontAwesomeIcons.shoppingBasket, color: Colors.red[200],),
                 Expanded(
                   child: Divider(
                     color: Colors.red[200],
-                    // thickness: 3,
+                    thickness: 2,
                   ),
                 ),
               ],
             ),
             GenerateText('Required Ingredients', 18),
-            Divider(color: Colors.red[200]),
+            Divider(color: Colors.red[200], thickness: 2),
             new GenerateList(ingredients, icons_ingredients),
             SizedBox(height: 15),
             Row(
@@ -128,22 +124,20 @@ class _RecipeState extends State<Recipe> {
                 Expanded(
                   child: Divider(
                     color: Colors.red[200],
-                    // thickness: 3,
+                    thickness: 2,
                   ),
                 ),
-                Text(' '),
                 Icon(FontAwesomeIcons.book, color: Colors.red[200],),
-                Text(' '),
                 Expanded(
                   child: Divider(
                     color: Colors.red[200],
-                    // thickness: 3,
+                    thickness: 2,
                   ),
                 ),
               ],
             ),
             GenerateText('Method of preparation', 18),
-            Divider(color: Colors.red[200]),
+            Divider(color: Colors.red[200], thickness: 2),
             new GenerateList(steps, icons_steps),
           ]),
         )));
