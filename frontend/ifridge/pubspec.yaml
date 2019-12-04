@@ -25,9 +25,9 @@ dependencies:
   transparent_image: ^1.0.0
   share: ^0.6.2+4
   path_provider: ^1.1.0
-  flutter_local_notifications: ^0.7.1+1
   flutter_svg: ^0.15.0
   scoped_model: ^0.3.0
+  flutter_local_notifications: ^0.8.4+3
 
   # background_fetch: '^0.2.0'
   # The following adds the Cupertino Icons font to your application.

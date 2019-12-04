@@ -5,6 +5,8 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:ifridge/screens/recipe_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 class HomeTab extends StatefulWidget {
   @override
   _HomeTabState createState() => _HomeTabState();
@@ -17,16 +19,18 @@ class _HomeTabState extends State<HomeTab> {
     var initializeAndroid = AndroidInitializationSettings('ic_launcher');
     var initializeIOS = IOSInitializationSettings();
     var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
-    await localNotificationsPlugin.initialize(initSettings);
+    await localNotificationsPlugin.initialize(initSettings);//, onSelectNotification: onSelection);
   }
+
+
 
   Future singleNotification(
       DateTime datetime, String message, String subtext, int hashcode,
       {String sound}) async {
     var androidChannel = AndroidNotificationDetails(
-      'channel-id',
-      'channel-name',
-      'channel-description',
+      'channel-id' + hashcode.toString(),
+      'channel-name' + hashcode.toString(),
+      'channel-description' + hashcode.toString(),
       importance: Importance.Max,
       priority: Priority.Max,
     );
@@ -73,11 +77,42 @@ class _HomeTabState extends State<HomeTab> {
     DateTime now = DateTime.now().toUtc().add(
           Duration(seconds: 5),
         );
+    var dinner = DateTime.now().toUtc().add(
+          Duration(minutes: 1),
+        );
+    var lunch = DateTime.now().toUtc().add(
+          Duration(minutes: 2),
+        );
+    var coffeeBreak = DateTime.now().toUtc().add(
+          Duration(minutes: 3),
+        );
+
     singleNotification(
       now,
-      "Notification",
-      "This is a notification",
+      "Is time to eat",
+      "Is time to eat",
       98123871,
+    );
+
+    singleNotification(
+      dinner,
+      "Is time to dinner",
+      "Is time to dinner",
+      98123872,
+    );
+
+    singleNotification(
+      lunch,
+      "Is time to lunch",
+      "Is time to lunch",
+      98123873,
+    );
+
+    singleNotification(
+      coffeeBreak,
+      "Is time to coffee",
+      "Is time to coffee",
+      98123874,
     );
   }
 
