@@ -12,9 +12,9 @@ import { Image } from '~/pages/_layouts/auth/styles';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string().required('A senha é obrigatória'),
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: Yup.string().required('Password is required'),
 });
 
 export default function SignIn() {
@@ -30,16 +30,16 @@ export default function SignIn() {
       <p>iFridge</p>
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input type="email" name="email" placeholder="Seu email" />
+        <Input type="email" name="email" placeholder="Your email" />
         <Input
           type="password"
           name="password"
-          placeholder="Sua senha secreta"
+          placeholder="Your secret password"
         />
 
-        <button type="submit">Acessar</button>
+        <button type="submit">Access</button>
 
-        <Link to="/register">Criar conta gratuita</Link>
+        <Link to="/register">Create free account</Link>
       </Form>
     </>
   );

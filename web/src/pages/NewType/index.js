@@ -9,8 +9,8 @@ import history from '~/services/history';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  name: Yup.string('O campo deve conter um texto').required(
-    'O campo nome é requerido'
+  name: Yup.string('Field must contain text').required(
+    'Name field is required'
   ),
 });
 
@@ -19,21 +19,21 @@ export default function NewType() {
     api
       .post('/types', { name })
       .then(() => {
-        toast.success('Tipo adicionado com sucesso!');
+        toast.success('Type successfully added!');
         history.push('/');
       })
       .catch(() => {
-        toast.error('Não foi possível adicionar este tipo');
+        toast.error('Could not add this type');
       });
   }
 
   return (
     <Container>
-      <h1>Adicionar tipos</h1>
+      <h1>Add types</h1>
       <hr />
       <Form onSubmit={handleSubmit} schema={schema}>
-        <Input type="text" name="name" placeholder="Nome do tipo de produto" />
-        <button type="submit">Criar tipo de produto</button>
+        <Input type="text" name="name" placeholder="Product Type Name" />
+        <button type="submit">Create product type</button>
       </Form>
     </Container>
   );

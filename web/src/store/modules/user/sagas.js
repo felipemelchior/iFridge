@@ -7,21 +7,22 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, address, ...rest } = payload.data;
+    const { name, email, address, cep, ...rest } = payload.data;
 
     const profile = {
       name,
       email,
       address,
+      cep,
       ...(rest.oldPassword ? rest : {}),
     };
 
     const response = yield call(api.put, '/users', profile);
-    toast.success('Perfil atualizado com sucesso!');
+    toast.success('Profile updated successfully!');
 
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
-    toast.error('Erro ao atualizar perfil, confira seus dados');
+    toast.error('Error updating profile, check your details');
     yield put(updateProfileFailure());
   }
 }

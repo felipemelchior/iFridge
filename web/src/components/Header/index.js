@@ -21,7 +21,7 @@ export default function Header() {
           <Profile>
             <div>
               <strong>{profile.name}</strong>
-              <Link to="/profile">Meu perfil</Link>
+              <Link to="/profile">My profile</Link>
             </div>
             <img
               src={`https://api.adorable.io/avatars/50/${profile.name}.png`}

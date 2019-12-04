@@ -39,14 +39,13 @@ class CustomDrawer extends StatelessWidget {
                       top: 8,
                       left: 0,
                       child: Text(
-                        "iFridge, if I cook \n I eat?",
+                        "iFridge",
                         style: TextStyle(
-                            fontSize: 34,
+                            fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                     ),
-                    SizedBox(height: 10,),
                     Positioned(
                         left: 0,
                         bottom: 0,
@@ -54,10 +53,10 @@ class CustomDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Hello!",
+                              "Hello, Cleiton!",
                               style: TextStyle(
                                   fontSize: 18,
-                                  fontWeight:FontWeight.bold,
+                                  fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
                           ],
@@ -94,6 +93,8 @@ class CustomDrawer extends StatelessWidget {
               Divider(),
               // DrawerTile(Icons.list, "Recipe", pageController, 1),
               DrawerTile(Icons.fastfood, "Fridge", pageController, 1),
+              Divider(),
+              DrawerTile(Icons.shopping_cart, "Market", pageController, 2),
               Divider()
             ],
           ),

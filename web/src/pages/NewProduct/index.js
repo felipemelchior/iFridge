@@ -38,33 +38,29 @@ export default function NewProduct() {
         promo_price,
       })
       .then(() => {
-        toast.success('Produto adicionado com sucesso!');
+        toast.success('Product successfully added!');
         history.push('/');
       })
       .catch(() => {
-        toast.error('Não foi possível adicionar este produto');
+        toast.error('Unable to add this product!');
       });
   }
 
   return (
     <Container>
-      <h1>Adicionar novo produto</h1>
+      <h1>Add new product</h1>
       <hr />
 
       <Form onSubmit={handleSubmit}>
-        <Input type="text" name="name" placeholder="Nome do produto" />
-        <Select
-          name="type_id"
-          placeholder="Selecione um tipo"
-          options={types}
-        />
+        <Input type="text" name="name" placeholder="Product's name" />
+        <Select name="type_id" placeholder="Select a type" options={types} />
         <div>
           <MdAttachMoney size={32} color="#000" />
           <Input
             type="number"
             step="0.01"
             name="price"
-            placeholder="Preço do produto"
+            placeholder="Product's price"
           />
         </div>
 
@@ -74,10 +70,10 @@ export default function NewProduct() {
             type="number"
             step="0.01"
             name="promo_price"
-            placeholder="Preço em promoção"
+            placeholder="Product's promotional price"
           />
         </div>
-        <button type="submit">Criar novo produto</button>
+        <button type="submit">Create new product</button>
       </Form>
     </Container>
   );
