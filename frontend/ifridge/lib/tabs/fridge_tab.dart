@@ -118,12 +118,6 @@ class _FridgeState extends State<Fridge> {
     DateTime now = DateTime.now().toUtc().add(
           Duration(seconds: 5),
         );
-    singleNotification(
-      now,
-      "Notification",
-      "This is a notification",
-      98123871,
-    );
     _readData().then((data) {
       setState(() {
         _ingredients = json.decode(data);

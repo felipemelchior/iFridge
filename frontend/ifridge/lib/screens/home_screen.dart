@@ -3,6 +3,7 @@ import 'package:ifridge/tabs/fridge_tab.dart';
 import 'package:ifridge/tabs/home_tab.dart';
 import 'package:ifridge/widgets/custom_drawer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:ifridge/screens/market_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   var responseData;
@@ -29,12 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime now = DateTime.now().toUtc().add(
           Duration(seconds: 5),
         );
-    singleNotification(
-      now,
-      "Notification",
-      "This is a notification",
-      98123871,
-    );
   }
 
   Future singleNotification(
@@ -84,6 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           drawer: CustomDrawer(_pageController),
           body: Fridge(),
+        ),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Market"),
+            centerTitle: true,
+          ),
+          drawer: CustomDrawer(_pageController),
+          body: Market(),
         ),
       ],
     );

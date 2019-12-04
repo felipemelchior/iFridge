@@ -6,6 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:ifridge/widgets/generate_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+
 class GenerateIngredients extends StatelessWidget {
   final List<String> ingredients = List();
   final List<bool> promotion = List();
@@ -62,6 +65,56 @@ class GenerateIngredients extends StatelessWidget {
         this.prices.add(i['price'].toDouble());
       }
       this.owners.add(i['User']['name']);
+    }
+    //fazer aqui
+    FlutterLocalNotificationsPlugin localNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+    initializeNotifications() async {
+      var initializeAndroid = AndroidInitializationSettings('ic_launcher');
+      var initializeIOS = IOSInitializationSettings();
+      var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
+      await localNotificationsPlugin.initialize(initSettings);//, onSelectNotification: onSelection);
+    }
+    Future singleNotification(
+        DateTime datetime, String message, String subtext, int hashcode,
+        {String sound}) async {
+      var androidChannel = AndroidNotificationDetails(
+        'channel-id' + hashcode.toString(),
+        'channel-name' + hashcode.toString(),
+        'channel-description' + hashcode.toString(),
+        importance: Importance.Max,
+        priority: Priority.Max,
+      );
+
+      var iosChannel = IOSNotificationDetails();
+      var platformChannel = NotificationDetails(androidChannel, iosChannel);
+      localNotificationsPlugin.schedule(
+          hashcode, message, subtext, datetime, platformChannel,
+          payload: hashcode.toString());
+    }
+    initializeNotifications();
+    DateTime now = DateTime.now().toUtc().add(
+          Duration(minutes: 1),
+        );
+    if (ingredients.isNotEmpty){
+      var ingredient;
+      var owner;
+      var price;
+
+      for(var i = 0; i < ingredients.length; i++){
+        if(promotion[i] == true){
+          ingredient = ingredients[i];
+          owner = owners[i];
+          price = prices[i];
+          singleNotification(
+            now,
+            "promotion",
+            "promotion: ${ingredient} cost ${price}. Its time to buy ${ingredient} with ${owner}",
+            98123876,
+          );
+          break;
+        }
+      }
     }
   }
 
