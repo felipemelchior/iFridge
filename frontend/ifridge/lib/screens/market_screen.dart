@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ifridge/widgets/generate_text.dart';
@@ -11,6 +13,43 @@ class GenerateIngredients extends StatelessWidget {
   final List<String> owners = List();
   final List<dynamic> data;
   GenerateIngredients(this.data);
+
+  Future<File> _getFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return File("${directory.path}/data.json");
+  }
+
+  Future<File> _saveData(_ingredients) async {
+    String data = json.encode(_ingredients);
+    final file = await _getFile();
+    return file.writeAsString(data);
+  }
+
+  Future<String> _readData() async {
+    try {
+      final file = await _getFile();
+      return file.readAsString();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  _saveIngredients(List<dynamic> data, String name){
+    var ingredient = {'ingredient':name, 'quantity':'1', 'metric': 'un'};
+    bool flag = true;
+    for(var i in data){
+      if(i['ingredient'] == name){
+        flag = false;
+        int aux = int.parse(i['quantity']) + 1;
+        i['quantity'] = aux.toString();
+        break;
+      }
+    }
+    if(flag){
+      data.add(ingredient);
+    }
+    _saveData(data);
+  }
 
   _prepareData(){
     for(var i in this.data){
@@ -68,7 +107,8 @@ class GenerateIngredients extends StatelessWidget {
                 ]),
               ],),
               trailing: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {
-                print(ingredients[index]);
+                Future<String> futureContent = _readData();
+                futureContent.then((data) => _saveIngredients(json.decode(data), ingredients[index]));
               }),
             ),
           );
@@ -95,7 +135,7 @@ class _MarketState extends State<Market> {
 
   void initState() {
     super.initState();
-
+    
     _getIngredients().then((map) {
       print(map);
     });
