@@ -4,7 +4,7 @@ import { lighten } from 'polished';
 export const Container = styled.div`
   width: 100%;
   max-width: 900px;
-  margin: 50px auto;
+  margin: 30px auto;
 
   display: flex;
   flex-direction: column;
@@ -67,11 +67,11 @@ export const HeaderList = styled.ul`
   }
 
   li:nth-child(2) {
-    margin-left: -15px;
+    margin-left: -5px;
   }
 
   li:nth-child(3) {
-    margin-right: 125px;
+    margin-right: 120px;
   }
 `;
 

@@ -40,33 +40,29 @@ export default function UpdateProduct({ location }) {
         promo_price,
       })
       .then(() => {
-        toast.success('Produto alterado com sucesso!');
+        toast.success('Product successfully changed!');
         history.push('/');
       })
       .catch(() => {
-        toast.error('Não foi possível alterar este produto');
+        toast.error('Unable to change this product');
       });
   }
 
   return (
     <Container>
-      <h1>Alterar produto</h1>
+      <h1>Change product</h1>
       <hr />
 
       <Form onSubmit={handleSubmit} initialData={product}>
-        <Input type="text" name="name" placeholder="Nome do produto" />
-        <Select
-          name="type_id"
-          placeholder="Selecione um tipo"
-          options={types}
-        />
+        <Input type="text" name="name" placeholder="Product's name" />
+        <Select name="type_id" placeholder="Select a type" options={types} />
         <div>
           <MdAttachMoney size={32} color="#000" />
           <Input
             type="number"
             step="0.01"
             name="price"
-            placeholder="Preço do produto"
+            placeholder="Price of the product"
           />
         </div>
 
@@ -76,10 +72,10 @@ export default function UpdateProduct({ location }) {
             type="number"
             step="0.01"
             name="promo_price"
-            placeholder="Preço do produto"
+            placeholder="Product promotional price"
           />
         </div>
-        <button type="submit">Alterar produto</button>
+        <button type="submit">Update product</button>
       </Form>
     </Container>
   );

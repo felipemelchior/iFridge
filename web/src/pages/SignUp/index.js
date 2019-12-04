@@ -11,15 +11,15 @@ import { Image } from '~/pages/_layouts/auth/styles';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
+  name: Yup.string().required('Name is required'),
   email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  address: Yup.string().required('Endereço é obrigatório'),
-  cep: Yup.string().required('Campo CEP é obrigatório'),
+    .email('Enter a valid email')
+    .required('Email is required'),
+  address: Yup.string().required('Address is required'),
+  cep: Yup.string().required('ZIP field is required'),
   password: Yup.string()
-    .min(6, 'No mínimo 6 caracteres')
-    .required('O nome é obrigatório'),
+    .min(6, '6 characters minimum')
+    .required('Name is required'),
 });
 
 export default function SignUp() {
@@ -35,21 +35,21 @@ export default function SignUp() {
       <p>iFridge</p>
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="name" type="text" placeholder="Nome Completo" />
-        <Input name="email" type="email" placeholder="Seu email" />
+        <Input name="name" type="text" placeholder="Full name" />
+        <Input name="email" type="email" placeholder="Your email" />
         <div>
-          <Input name="address" type="text" placeholder="Endereço comercial" />
-          <Input name="cep" type="text" placeholder="Seu CEP" />
+          <Input name="address" type="text" placeholder="Business address" />
+          <Input name="cep" type="text" placeholder="Your zip code" />
         </div>
         <Input
           name="password"
           type="password"
-          placeholder="Sua senha secreta"
+          placeholder="Your secret password"
         />
 
-        <button type="submit">Criar conta</button>
+        <button type="submit">Create an account</button>
 
-        <Link to="/">Já possui cadastro?</Link>
+        <Link to="/">Already registered?</Link>
       </Form>
     </>
   );

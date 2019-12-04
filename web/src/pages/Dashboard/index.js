@@ -36,10 +36,10 @@ export default function Dashboard() {
     const response = await api.delete(`/merchant/${id}`);
 
     if (response.data) {
-      toast.success('Produto excluido com sucesso!');
+      toast.success('Product successfully removed!');
       loadProducts();
     } else {
-      toast.error('Não foi possível excluir este produto!');
+      toast.error('Unable to delete this product!');
       loadProducts();
     }
   }
@@ -51,15 +51,13 @@ export default function Dashboard() {
       })
       .then(() => {
         if (promo_activated) {
-          toast.success('Produto adicionado a lista de promoções!');
+          toast.success('Product added to promotion list!');
         } else {
-          toast.success('Produto retirado da lista de promoções!');
+          toast.success('Product removed from promotion list!');
         }
       })
       .catch(() => {
-        toast.error(
-          'Não foi possível adicionar este produto a lista de promoções'
-        );
+        toast.error('Unable to add this product to promotion list');
       });
 
     loadProducts();
@@ -70,24 +68,26 @@ export default function Dashboard() {
       <div>
         <button type="button" onClick={handleNewType}>
           <MdAdd size={36} color="#d1191d" />
-          <span>Adicionar Tipo de alimento</span>
+          <br />
+          <span>Add Product Type</span>
         </button>
 
         <button type="button" onClick={handleNewProduct}>
           <MdAdd size={36} color="#d1191d" />
-          <span>Adicionar Tipo novo produto</span>
+          <br />
+          <span>Add New Product</span>
         </button>
       </div>
 
       <ProductList>
         <HeaderList>
-          <li>Nome do produto</li>
-          <li>Tipo de produto</li>
-          <li>Preço</li>
+          <li>Product name</li>
+          <li>Product type</li>
+          <li>Price</li>
           <div />
         </HeaderList>
         {loading ? (
-          <h2>Carregando produtos...</h2>
+          <h2>Loading products ...</h2>
         ) : (
           products.map(product => (
             <Product key={product.id}>
