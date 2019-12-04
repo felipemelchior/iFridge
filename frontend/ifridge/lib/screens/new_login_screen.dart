@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ifridge/models/user_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -224,8 +223,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           model.signIn(
                                               userData, _onSuccess, _onFail);
 
-                                              print(response['token']);
-                                              print(response['user']['name']);
+                                              // print(response['token']);
+                                              // print(response['user']['name']);
                                           // response = json.encode(response);
                                           // Map myMap = json.decode(response);
                                           // myMap = json.decode(myMap['token']);
