@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:ifridge/screens/recipe_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomeTab extends StatefulWidget {
   @override
@@ -11,9 +11,36 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  FlutterLocalNotificationsPlugin localNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  initializeNotifications() async {
+    var initializeAndroid = AndroidInitializationSettings('ic_launcher');
+    var initializeIOS = IOSInitializationSettings();
+    var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
+    await localNotificationsPlugin.initialize(initSettings);
+  }
+
+  Future singleNotification(
+      DateTime datetime, String message, String subtext, int hashcode,
+      {String sound}) async {
+    var androidChannel = AndroidNotificationDetails(
+      'channel-id',
+      'channel-name',
+      'channel-description',
+      importance: Importance.Max,
+      priority: Priority.Max,
+    );
+
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    localNotificationsPlugin.schedule(
+        hashcode, message, subtext, datetime, platformChannel,
+        payload: hashcode.toString());
+  }
+
   String _search;
   int _offset = 0;
-  String api_key = '04854e690d41401187e49dc4adb86271';
+  String api_key = 'asdasd';
   String amount = '20';
 
   Future<Map> _getSearch() async {
@@ -21,10 +48,17 @@ class _HomeTabState extends State<HomeTab> {
 
     if (_search == null || _search.isEmpty)
       response = await http.get(
-          "https://api.spoonacular.com/recipes/random?apiKey="+api_key+"&number="+amount);
+          "https://api.spoonacular.com/recipes/random?apiKey=" +
+              api_key +
+              "&number=" +
+              amount);
     else
       response = await http.get(
-          "https://api.spoonacular.com/recipes/complexSearch?apiKey="+api_key+"&query=$_search&includeIngredients?$_search&number="+amount+"&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
+              api_key +
+              "&query=$_search&includeIngredients?$_search&number=" +
+              amount +
+              "&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
 
     return json.decode(response.body);
   }
@@ -35,6 +69,16 @@ class _HomeTabState extends State<HomeTab> {
     _getSearch().then((map) {
       print(map);
     });
+    initializeNotifications();
+    DateTime now = DateTime.now().toUtc().add(
+          Duration(seconds: 5),
+        );
+    singleNotification(
+      now,
+      "Notification",
+      "This is a notification",
+      98123871,
+    );
   }
 
   Widget build(BuildContext context) {
@@ -140,8 +184,7 @@ class _HomeTabState extends State<HomeTab> {
                       builder: (context) =>
                           Recipe(snapshot.data["results"][index])));
             },
-            onLongPress: () {
-            },
+            onLongPress: () {},
           );
         } else {
           return Container(
@@ -204,8 +247,7 @@ class _HomeTabState extends State<HomeTab> {
                     builder: (context) =>
                         Recipe(snapshot.data["recipes"][index])));
           },
-          onLongPress: () {
-          },
+          onLongPress: () {},
         );
       },
     );

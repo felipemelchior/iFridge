@@ -87,7 +87,8 @@ class _RecipeState extends State<Recipe> {
         home: Scaffold(
             body: SingleChildScrollView(
           child: new Column(children: [
-            // new SizedBox(height: 15),
+
+            new SizedBox(height: 50),
             new ClipRRect(
               borderRadius: new BorderRadius.circular(0.0),
               child: Image.network(
