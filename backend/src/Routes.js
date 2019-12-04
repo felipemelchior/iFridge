@@ -4,6 +4,7 @@ import UserController from './app/controllers/User';
 import SessionController from './app/controllers/Session';
 import TypesController from './app/controllers/Types';
 import MerchantController from './app/controllers/Merchant';
+import ProductsController from './app/controllers/Products';
 
 import authMiddleware from './app/middlewares/auth';
 import merchantMiddleware from './app/middlewares/merchant';
@@ -13,6 +14,7 @@ const routes = new Router();
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+routes.get('/products', ProductsController.index);
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
