@@ -41,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
                       child: Text(
                         "iFridge, if I cook \n I eat?",
                         style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 34,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
