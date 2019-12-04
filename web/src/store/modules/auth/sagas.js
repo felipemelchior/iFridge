@@ -15,7 +15,7 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user.merchant) {
-      toast.error('Serviço disponível apenas para comerciantes');
+      toast.error('Service available to merchants only');
       return;
     }
 
@@ -25,7 +25,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados!');
+    toast.error('Authentication failed, check your data!');
     yield put(signFailure());
   }
 }
@@ -43,10 +43,10 @@ export function* signUp({ payload }) {
       merchant: true,
     });
 
-    toast.success('Conta criada com sucesso!');
+    toast.success('Account successfully created!');
     history.push('/');
   } catch (err) {
-    toast.error('Falha no cadastro, verifique seus dados!');
+    toast.error('Registration failed, check your details!');
 
     yield put(signFailure());
   }
