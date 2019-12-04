@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'package:ifridge/widgets/generate_list.dart';
 
 class Fridge extends StatefulWidget {
@@ -26,6 +26,32 @@ class _FridgeState extends State<Fridge> {
   Map<String, dynamic> _lastRemoved;
   int _lastRemovedPos;
 
+  FlutterLocalNotificationsPlugin localNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  initializeNotifications() async {
+    var initializeAndroid = AndroidInitializationSettings('ic_launcher');
+    var initializeIOS = IOSInitializationSettings();
+    var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
+    await localNotificationsPlugin.initialize(initSettings);
+  }
+
+  Future singleNotification(
+      DateTime datetime, String message, String subtext, int hashcode,
+      {String sound}) async {
+    var androidChannel = AndroidNotificationDetails(
+      'channel-id',
+      'channel-name',
+      'channel-description',
+      importance: Importance.Max,
+      priority: Priority.Max,
+    );
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    localNotificationsPlugin.schedule(
+        hashcode, message, subtext, datetime, platformChannel,
+        payload: hashcode.toString());
+  }
+
   Widget buildItem(context, index) {
     return Dismissible(
       key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
@@ -43,7 +69,7 @@ class _FridgeState extends State<Fridge> {
       child: ListTile(
         leading: Icon(
           Icons.kitchen,
-          color: Colors.black,
+          color: Colors.red,
         ),
         title: Text(
           _ingredients[index]["ingredient"] +
@@ -88,7 +114,16 @@ class _FridgeState extends State<Fridge> {
   @override
   void initState() {
     super.initState();
-
+    initializeNotifications();
+    DateTime now = DateTime.now().toUtc().add(
+          Duration(seconds: 5),
+        );
+    singleNotification(
+      now,
+      "Notification",
+      "This is a notification",
+      98123871,
+    );
     _readData().then((data) {
       setState(() {
         _ingredients = json.decode(data);
@@ -110,11 +145,11 @@ class _FridgeState extends State<Fridge> {
     });
   }
 
-  void _resetFields() {
-    _ingredientController.text = "";
-    _quantityController.text = "";
-    _metricController.text = "";
-  }
+  // void _resetFields() {
+  //   _ingredientController.text = "";
+  //   _quantityController.text = "";
+  //   _metricController.text = "";
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,19 +168,37 @@ class _FridgeState extends State<Fridge> {
                       Expanded(
                         child: Icon(
                           Icons.kitchen,
-                          color: Colors.red,
+                          color: Colors.red[500],
                           size: 50,
                         ),
                       ),
                     ],
                   ),
                   Expanded(
-                    child: Card(
-                      child: ListView.builder(
-                          padding: EdgeInsets.only(top: 10),
-                          itemCount: _ingredients.length,
-                          itemBuilder: buildItem),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0.0, 15.0),
+                              blurRadius: 15.0),
+                        ],
+                        // color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50),
+                        ),
+                      ),
+                      child: Card(
+                        child: ListView.builder(
+                            padding: EdgeInsets.only(top: 10),
+                            itemCount: _ingredients.length,
+                            itemBuilder: buildItem),
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     children: <Widget>[
