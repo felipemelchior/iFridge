@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController();
   void initState() {
     super.initState();
-    initializeNotifications();
     DateTime now = DateTime.now().toUtc().add(
           Duration(seconds: 5),
         );
