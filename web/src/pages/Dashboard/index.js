@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MdAdd, MdUpdate, MdDeleteForever } from 'react-icons/md';
-import { FaTag } from 'react-icons/fa';
+import { FaTags } from 'react-icons/fa';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -99,7 +99,7 @@ export default function Dashboard() {
               </p>
               <div>
                 {product.promo_activated ? (
-                  <FaTag
+                  <FaTags
                     onClick={() =>
                       handlePromotion(product.id, !product.promo_activated)
                     }
@@ -107,7 +107,7 @@ export default function Dashboard() {
                     color="#FFD700"
                   />
                 ) : (
-                  <FaTag
+                  <FaTags
                     onClick={() =>
                       handlePromotion(product.id, !product.promo_activated)
                     }
