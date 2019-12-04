@@ -5,11 +5,14 @@ import 'package:ifridge/widgets/custom_drawer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomeScreen extends StatefulWidget {
+  var responseData;
   @override
   _HomeScreenState createState() => _HomeScreenState();
+  HomeScreen(responseData);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   final _pageController = PageController();
   FlutterLocalNotificationsPlugin localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
