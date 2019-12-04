@@ -119,9 +119,9 @@ class UserController {
 
     await user.update(req.body);
 
-    const { id, name, address } = await User.findByPk(req.userId);
+    const { id, name, address, cep } = await User.findByPk(req.userId);
 
-    return res.json({ id, name, email, address });
+    return res.json({ id, name, email, address, cep });
   }
 }
 
