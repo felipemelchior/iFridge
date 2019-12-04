@@ -11,32 +11,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  FlutterLocalNotificationsPlugin localNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  initializeNotifications() async {
-    var initializeAndroid = AndroidInitializationSettings('ic_launcher');
-    var initializeIOS = IOSInitializationSettings();
-    var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
-    await localNotificationsPlugin.initialize(initSettings);
-  }
-
-  Future singleNotification(
-      DateTime datetime, String message, String subtext, int hashcode,
-      {String sound}) async {
-    var androidChannel = AndroidNotificationDetails(
-      'channel-id',
-      'channel-name',
-      'channel-description',
-      importance: Importance.Max,
-      priority: Priority.Max,
-    );
-
-    var iosChannel = IOSNotificationDetails();
-    var platformChannel = NotificationDetails(androidChannel, iosChannel);
-    localNotificationsPlugin.schedule(
-        hashcode, message, subtext, datetime, platformChannel,
-        payload: hashcode.toString());
-  }
 
   String _search;
   int _offset = 0;
@@ -69,16 +43,6 @@ class _HomeTabState extends State<HomeTab> {
     _getSearch().then((map) {
       print(map);
     });
-    initializeNotifications();
-    DateTime now = DateTime.now().toUtc().add(
-          Duration(seconds: 5),
-        );
-    singleNotification(
-      now,
-      "Notification",
-      "This is a notification",
-      98123871,
-    );
   }
 
   Widget build(BuildContext context) {

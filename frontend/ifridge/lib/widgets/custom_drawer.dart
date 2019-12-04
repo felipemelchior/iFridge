@@ -39,13 +39,14 @@ class CustomDrawer extends StatelessWidget {
                       top: 8,
                       left: 0,
                       child: Text(
-                        "iFridge, I cooked \n is it mine?",
+                        "iFridge, if I cook \n I eat?",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                     ),
+                    SizedBox(height: 10,),
                     Positioned(
                         left: 0,
                         bottom: 0,
@@ -53,10 +54,10 @@ class CustomDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Hello, Cleiton!",
+                              "Hello!",
                               style: TextStyle(
                                   fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight:FontWeight.bold,
                                   color: Colors.white),
                             ),
                           ],
