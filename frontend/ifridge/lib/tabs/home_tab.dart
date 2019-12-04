@@ -4,12 +4,22 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 class HomeTab extends StatefulWidget {
   @override
   _HomeTabState createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
+  FlutterLocalNotificationsPlugin localNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  initializeNotifications() async {
+    var initializeAndroid = AndroidInitializationSettings('ic_launcher');
+    var initializeIOS = IOSInitializationSettings();
+    var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
+    await localNotificationsPlugin.initialize(initSettings);
+  }
   String _search;
   int _offset = 0;
 
@@ -18,21 +28,55 @@ class _HomeTabState extends State<HomeTab> {
 
     if (_search == null || _search.isEmpty)
       response = await http.get(
-          "https://api.spoonacular.com/recipes/random?apiKey=0adbad720c1c45c2929c6f973c87bdec&number=20");
+          "https://api.spoonacular.com/recipes/random?apiKey=qualquermerda&number=20");
     else
       response = await http.get(
-          "https://api.spoonacular.com/recipes/complexSearch?apiKey=0adbad720c1c45c2929c6f973c87bdec&query=$_search&includeIngredients?$_search&number=20&offset=$_offset");
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey=qualquermerda&query=$_search&includeIngredients?$_search&number=20&offset=$_offset");
 
     print(json.decode(response.body));
     return json.decode(response.body);
   }
 
+  @override
   void initState() {
     super.initState();
-
+    initializeNotifications();
     _getSearch().then((map) {
       print(map);
     });
+    startNotification();
+  }
+  
+  startNotification() async {
+    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+    DateTime now = DateTime.now().toUtc().add(
+          Duration(seconds: 10),
+        );
+    await singleNotification(
+      now,
+      "Notification",
+      "This is a notification",
+      98123871,
+    );
+    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+  }
+
+  Future singleNotification(
+      DateTime datetime, String message, String subtext, int hashcode,
+      {String sound}) async {
+    var androidChannel = AndroidNotificationDetails(
+      'channel-id',
+      'channel-name',
+      'channel-description',
+      importance: Importance.Max,
+      priority: Priority.Max,
+    );
+
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    localNotificationsPlugin.schedule(
+        hashcode, message, subtext, datetime, platformChannel,
+        payload: hashcode.toString());
   }
 
   Widget build(BuildContext context) {
