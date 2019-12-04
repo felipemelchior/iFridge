@@ -4,6 +4,30 @@ import api from '../../services/api';
 
 import User from '../models/User';
 
+async function checkCEP(cep) {
+  const { street, city } = await cepPromise(cep);
+
+  const string = `${
+    street
+      ? street
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/ /g, '+')
+      : ''
+  }+${
+    city
+      ? city
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/ /g, '+')
+      : ''
+  }`;
+
+  const response = await api.get(string);
+
+  return response.data[0];
+}
+
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -33,27 +57,7 @@ class UserController {
 
     const { name, email, address, password, merchant, cep } = req.body;
 
-    const { street, city } = await cepPromise(cep);
-
-    const string = `${
-      street
-        ? street
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/ /g, '+')
-        : ''
-    }+${
-      city
-        ? city
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/ /g, '+')
-        : ''
-    }`;
-
-    const response = await api.get(string);
-
-    const { lat, lon } = response.data[0];
+    const { lat, lon } = await checkCEP(cep);
 
     const { id } = await User.create({
       name,
@@ -117,11 +121,13 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    await user.update(req.body);
+    const { lat, lon } = await checkCEP(req.body.cep);
 
-    const { id, name, address } = await User.findByPk(req.userId);
+    await user.update({ ...req.body, latitude: lat, longitude: lon });
 
-    return res.json({ id, name, email, address });
+    const { id, name, address, cep } = await User.findByPk(req.userId);
+
+    return res.json({ id, name, email, address, cep });
   }
 }
 

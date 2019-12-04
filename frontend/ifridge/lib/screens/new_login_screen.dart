@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ifridge/models/user_model.dart';
-import 'package:ifridge/widgets/login_form_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ifridge/screens/home_screen.dart';
 import 'package:ifridge/screens/signup_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'dart:async';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,14 +14,19 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  var responseData;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     bool _rememberMeFlag = false;
-    final _formKey = GlobalKey<FormState>();
 
     return new Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
       body: Stack(
@@ -116,12 +122,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                           ]),
                                       child: TextFormField(
+                                        controller: _emailController,
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: (text) {
                                           if (text.isEmpty ||
-                                              text.contains("@"))
-                                            return "E-mail inválido";
+                                              !text.contains("@"))
+                                            return "Invalid email";
                                         },
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
@@ -161,18 +168,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                           ]),
                                       child: TextFormField(
+                                        controller: _passwordController,
                                         textAlign: TextAlign.left,
                                         obscureText: true,
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: (text) {
                                           if (text.isEmpty || text.length < 6)
-                                            return "Senha inválida";
+                                            return "Invalid password";
                                         },
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
                                           icon: Icon(Icons.vpn_lock),
-                                          hintText: "Senha",
+                                          hintText: "Password",
                                           labelStyle: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w400,
@@ -186,27 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       height: ScreenUtil.getInstance()
                                           .setHeight(10),
                                     ),
-                                    GestureDetector(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Checkbox(
-                                            value: _rememberMeFlag,
-                                            onChanged: (value) => setState(() {
-                                              _rememberMeFlag =
-                                                  !_rememberMeFlag;
-                                            }),
-                                          ),
-                                          Text(
-                                            "Lembrar-me",
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                      onTap: () => setState(() {
-                                        _rememberMeFlag = !_rememberMeFlag;
-                                      }),
-                                    ),
                                     Container(
                                       alignment: Alignment.center,
                                       child: FlatButton.icon(
@@ -216,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.white,
                                         ),
                                         label: Text(
-                                          "Entrar",
+                                          "Sign In",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Colors.white,
@@ -225,10 +212,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 .setSp(40),
                                           ),
                                         ),
-                                        onPressed: () {
-                                          if (_formKey.currentState
-                                              .validate()) {}
-                                              model.signIn();
+                                        onPressed: () async {
+                                          // if (_formKey.currentState
+                                          //     .validate()) {}
+                                          Map<String, dynamic> userData = {
+                                            "email": _emailController.text,
+                                            "password":
+                                                _passwordController.text,
+                                          };
+                                          var response = await
+                                          model.signIn(
+                                              userData, _onSuccess, _onFail);
+
+                                              print(response['token']);
+                                              print(response['user']['name']);
+                                          // response = json.encode(response);
+                                          // Map myMap = json.decode(response);
+                                          // myMap = json.decode(myMap['token']);
+
+                                          // print(myMap['token']);
                                         },
                                       ),
                                     ),
@@ -259,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: InkWell(
                                         onTap: () {},
                                         child: Text(
-                                          "Esqueceu sua senha?",
+                                          "Forgot your password?",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Colors.blue,
@@ -275,21 +277,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            "Novo por aqui? ",
+                                            "New here? ",
                                             style: TextStyle(
                                               fontFamily: "Merriweather",
                                             ),
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              SignUpScreen()));
+                                              // Navigator.of(context)
+                                              //     .pushReplacement(
+                                              //         MaterialPageRoute(
+                                              //             builder: (context) =>
+                                              //                 SignUpScreen()));
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SignUpScreen()));
                                             },
                                             child: Text(
-                                              "Cadastre-se!",
+                                              "Sign Up!",
                                               style: TextStyle(
                                                 color: Colors.blue,
                                                 fontFamily: "Merriweather",
@@ -320,5 +326,25 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  void _onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Logged in!"),
+      backgroundColor: Colors.greenAccent,
+      duration: Duration(seconds: 2),
+    ));
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen(responseData)));
+    });
+  }
+
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Login fail!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 2),
+    ));
   }
 }
