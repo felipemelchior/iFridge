@@ -39,7 +39,7 @@ class CustomDrawer extends StatelessWidget {
                       top: 8,
                       left: 0,
                       child: Text(
-                        "iFridge, I cooked \n is it mine?",
+                        "iFridge",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -93,6 +93,8 @@ class CustomDrawer extends StatelessWidget {
               Divider(),
               // DrawerTile(Icons.list, "Recipe", pageController, 1),
               DrawerTile(Icons.fastfood, "Fridge", pageController, 1),
+              Divider(),
+              DrawerTile(Icons.shopping_cart, "Market", pageController, 2),
               Divider()
             ],
           ),
