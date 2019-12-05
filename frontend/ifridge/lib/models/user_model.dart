@@ -12,7 +12,7 @@ class UserModel extends Model {
   void signUp(Map<String, dynamic> userData, VoidCallback onSuccess,
       VoidCallback onFail) async {
     http.Response response;
-    var url = "http://192.168.0.102:9091/users";
+    var url = "http://10.2.241.88:8080/users";
 
     isLoading = true;
     await Future.delayed(Duration(seconds: 3));
@@ -33,7 +33,7 @@ class UserModel extends Model {
   signIn(Map<String, dynamic> userData, VoidCallback onSuccess,
       VoidCallback onFail) async {
     http.Response response;
-    var url = "http://192.168.0.102:9091/sessions";
+    var url = "http://10.2.241.88:8080/sessions";
 
     isLoading = true;
     await Future.delayed(Duration(seconds: 3));

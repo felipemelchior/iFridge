@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:ifridge/screens/recipe_screen.dart';
 
@@ -14,14 +16,14 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   FlutterLocalNotificationsPlugin localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+      List _ingredients = [];
   initializeNotifications() async {
     var initializeAndroid = AndroidInitializationSettings('ic_launcher');
     var initializeIOS = IOSInitializationSettings();
     var initSettings = InitializationSettings(initializeAndroid, initializeIOS);
-    await localNotificationsPlugin.initialize(initSettings);//, onSelectNotification: onSelection);
+    await localNotificationsPlugin
+        .initialize(initSettings); //, onSelectNotification: onSelection);
   }
-
-
 
   Future singleNotification(
       DateTime datetime, String message, String subtext, int hashcode,
@@ -43,13 +45,31 @@ class _HomeTabState extends State<HomeTab> {
 
   String _search;
   int _offset = 0;
-  String api_key = 'asdasd';
+  String api_key = '3eaf1a30a7f54659acf673c9771111c3';
   String amount = '20';
 
   Future<Map> _getSearch() async {
     http.Response response;
 
-    if (_search == null || _search.isEmpty)
+    if (!_ingredients.isEmpty) {
+      // print(_ingredients);
+      // print("MEU PAU ALADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO");
+      // print(_ingredients[0]['ingredient']);
+      // String items;
+      // for (var i = 0; i < _ingredients.length; i++) {
+      //   _search = _search + _ingredients[i]['ingredient'];
+      // }
+      _search = _ingredients[0]['ingredient'];
+      // print(_search);
+      // _search = "potato";
+
+      response = await http.get(
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
+              api_key +
+              "&query=$_search&includeIngredients?$_search&number=" +
+              amount +
+              "&offset=$_offset&addRecipeInformation=true&instructionsRequired=true");
+    } else if (_search == null || _search.isEmpty)
       response = await http.get(
           "https://api.spoonacular.com/recipes/random?apiKey=" +
               api_key +
@@ -66,9 +86,33 @@ class _HomeTabState extends State<HomeTab> {
     return json.decode(response.body);
   }
 
+  Future<File> _getFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return File("${directory.path}/data.json");
+  }
+
+  Future<File> _saveData() async {
+    String data = json.encode(_ingredients);
+    final file = await _getFile();
+    return file.writeAsString(data);
+  }
+
+  Future<String> _readData() async {
+    try {
+      final file = await _getFile();
+      return file.readAsString();
+    } catch (e) {
+      return null;
+    }
+  }
+
   void initState() {
     super.initState();
-
+    _readData().then((data) {
+      setState(() {
+        _ingredients = json.decode(data);
+      });
+    });
     _getSearch().then((map) {
       print(map);
     });

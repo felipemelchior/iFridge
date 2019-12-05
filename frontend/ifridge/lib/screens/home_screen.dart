@@ -7,8 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ifridge/screens/market_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  var responseData;
-  HomeScreen(this.responseData);
+  // var responseData;
+  // HomeScreen(this.responseData);
   _HomeScreenState createState() => _HomeScreenState();
 }
 

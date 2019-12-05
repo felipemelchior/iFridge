@@ -335,7 +335,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
     Future.delayed(Duration(seconds: 2)).then((_) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen(responseData)));
+          MaterialPageRoute(builder: (context) => HomeScreen()));
     });
   }
 

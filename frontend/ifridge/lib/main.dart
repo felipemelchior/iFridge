@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ifridge/models/user_model.dart';
+import 'package:ifridge/screens/home_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'screens/new_login_screen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.red,
           // primaryColor: Color.fromARGB(255, 255, 0, 0),
         ),
-        home: LoginScreen(),
+        home: HomeScreen(),
       ),
     );
   }

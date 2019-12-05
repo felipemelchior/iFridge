@@ -182,7 +182,7 @@ class _MarketState extends State<Market> {
   Future<List<dynamic>> _getIngredients() async {
     http.Response response;
 
-    response = await http.get('http://192.168.0.102:9091/products');
+    response = await http.get('http://10.2.241.88:8080/products');
     return json.decode(response.body);
   }
 
